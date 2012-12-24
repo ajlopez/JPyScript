@@ -5,4 +5,16 @@ var py2s = require('../'),
 // Lexer defined
 
 assert.ok(py2s.Lexer);
+assert.ok(py2s.TokenType);
+
+Lexer = py2s.Lexer;
+TokenType = py2s.TokenType;
+
+// Get name token
+
+var lexer = new Lexer("spam");
+var token = lexer.nextToken();
+assert.ok(token);
+assert.equal(token.value, "spam");
+assert.equal(token.type, TokenType.Name);
 
