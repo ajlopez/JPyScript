@@ -1,6 +1,15 @@
 
 var py2s = require('../'),
     assert = require('assert');
+
+function getToken(text, value, type) {
+    var lexer = new Lexer(text);
+    var token = lexer.nextToken();
+    assert.ok(token);
+    assert.equal(token.value, value);
+    assert.equal(token.type, type);
+    assert.equal(lexer.nextToken(), null);
+}
         
 // Lexer defined
 
@@ -12,36 +21,16 @@ TokenType = py2s.TokenType;
 
 // Get name token
 
-var lexer = new Lexer("spam");
-var token = lexer.nextToken();
-assert.ok(token);
-assert.equal(token.value, "spam");
-assert.equal(token.type, TokenType.Name);
-assert.equal(lexer.nextToken(), null);
+getToken("spam", "spam", TokenType.Name);
 
 // Get name token with spaces
 
-var lexer = new Lexer("  spam   ");
-var token = lexer.nextToken();
-assert.ok(token);
-assert.equal(token.value, "spam");
-assert.equal(token.type, TokenType.Name);
-assert.equal(lexer.nextToken(), null);
+getToken("  spam  ", "spam", TokenType.Name);
 
 // Get integer
 
-var lexer = new Lexer("123");
-var token = lexer.nextToken();
-assert.ok(token);
-assert.equal(token.value, "123");
-assert.equal(token.type, TokenType.Integer);
-assert.equal(lexer.nextToken(), null);
+getToken("123", "123", TokenType.Integer);
 
 // Get integer with spaces
 
-var lexer = new Lexer("  123   ");
-var token = lexer.nextToken();
-assert.ok(token);
-assert.equal(token.value, "123");
-assert.equal(token.type, TokenType.Integer);
-assert.equal(lexer.nextToken(), null);
+getToken("   123   ", "123", TokenType.Integer);
