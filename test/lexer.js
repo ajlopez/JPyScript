@@ -56,3 +56,7 @@ getTokens("spam foo bar", ["spam", "foo", "bar"], TokenType.Name);
 // Get three integers
 
 getTokens("123 456 789", ["123", "456", "789"], TokenType.Integer);
+
+// Get single char operators
+
+getTokens("+-*/=.><", ["+", "-", "*", "/", "=", ".", ">", "<"], TokenType.Operator);
