@@ -27,3 +27,21 @@ assert.ok(token);
 assert.equal(token.value, "spam");
 assert.equal(token.type, TokenType.Name);
 assert.equal(lexer.nextToken(), null);
+
+// Get integer
+
+var lexer = new Lexer("123");
+var token = lexer.nextToken();
+assert.ok(token);
+assert.equal(token.value, "123");
+assert.equal(token.type, TokenType.Integer);
+assert.equal(lexer.nextToken(), null);
+
+// Get integer with spaces
+
+var lexer = new Lexer("  123   ");
+var token = lexer.nextToken();
+assert.ok(token);
+assert.equal(token.value, "123");
+assert.equal(token.type, TokenType.Integer);
+assert.equal(lexer.nextToken(), null);
