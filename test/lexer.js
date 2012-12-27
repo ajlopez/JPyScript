@@ -41,6 +41,14 @@ getToken("spam", "spam", TokenType.Name);
 
 getToken("  spam  ", "spam", TokenType.Name);
 
+// Get name token with underscores
+
+getToken("__init__", "__init__", TokenType.Name);
+
+// Get name token with digits
+
+getToken("spam123", "spam123", TokenType.Name);
+
 // Get integer
 
 getToken("123", "123", TokenType.Integer);
