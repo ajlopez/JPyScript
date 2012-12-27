@@ -52,3 +52,7 @@ getToken("   123   ", "123", TokenType.Integer);
 // Get three names
 
 getTokens("spam foo bar", ["spam", "foo", "bar"], TokenType.Name);
+
+// Get three integers
+
+getTokens("123 456 789", ["123", "456", "789"], TokenType.Integer);
