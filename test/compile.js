@@ -32,6 +32,11 @@ assert.equal(compileExpression('"spam"'), '"spam"');
 
 assert.equal(compileExpression('1+2'), '1 + 2');
 
-// Parse string command
+// Parse expression command
 
 assert.equal(compileCommand('"spam"'), '"spam";');
+assert.equal(compileCommand('123'), '123;');
+assert.equal(compileCommand('1+2'), '1 + 2;');
+
+// Parse assign command
+
