@@ -72,3 +72,9 @@ getTokens("+-*/=.><", ["+", "-", "*", "/", "=", ".", ">", "<"], TokenType.Operat
 // Get separators
 
 getTokens("()[]{},:;", ["(", ")", "[", "]", "{", "}", ",", ":", ";"], TokenType.Separator);
+
+// Get string
+
+getToken("'spam'", "spam", TokenType.String);
+getToken('"spam"', "spam", TokenType.String);
+

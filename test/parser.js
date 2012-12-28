@@ -15,3 +15,7 @@ function parseExpression(text) {
 // Parse integer expression
 
 parseExpression("123");
+
+// Parse string expression
+
+parseExpression('"spam"');
