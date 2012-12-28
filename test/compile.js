@@ -40,3 +40,5 @@ assert.equal(compileCommand('1+2'), '1 + 2;');
 
 // Parse assign command
 
+assert.equal(compileCommand('a=1'), 'a = 1;');
+
