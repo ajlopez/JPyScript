@@ -11,6 +11,12 @@ function getToken(text, value, type) {
     assert.equal(lexer.nextToken(), null);
 }
 
+function getNullToken(text) {
+    var lexer = new Lexer(text);
+    var token = lexer.nextToken();
+    assert.equal(token, null);
+}
+
 function getTokens(text, values, type) {
     var lexer = new Lexer(text);
     var n = values.length;
@@ -32,6 +38,13 @@ assert.ok(py2s.TokenType);
 
 Lexer = py2s.Lexer;
 TokenType = py2s.TokenType;
+
+// Get null token
+
+getNullToken(null);
+getNullToken('');
+getNullToken('  ');
+getNullToken('  # a comment');
 
 // Get name token
 
