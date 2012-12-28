@@ -12,6 +12,14 @@ function compileExpression(text) {
     return expr.compile();
 }
 
+function compileCommand(text) {
+    var parser = new py2s.Parser(text);
+    var cmd = parser.parseCommand();
+    assert.ok(cmd);
+    assert.equal(parser.parseCommand(), null);
+    return cmd.compile();
+}
+
 // Compile integer expression
 
 assert.equal(compileExpression("123"), "123");
@@ -23,3 +31,7 @@ assert.equal(compileExpression('"spam"'), '"spam"');
 // Parse add expression
 
 assert.equal(compileExpression('1+2'), '1 + 2');
+
+// Parse string command
+
+assert.equal(compileCommand('"spam"'), '"spam";');
