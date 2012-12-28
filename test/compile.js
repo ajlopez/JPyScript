@@ -19,3 +19,7 @@ assert.equal(compileExpression("123"), "123");
 // Parse string expression
 
 assert.equal(compileExpression('"spam"'), '"spam"');
+
+// Parse add expression
+
+assert.equal(compileExpression('1+2'), '1 + 2');

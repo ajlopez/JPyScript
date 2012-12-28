@@ -19,3 +19,7 @@ assert.equal(evaluateExpression("123"), 123);
 // Evaluate string
 
 assert.equal(evaluateExpression('"spam"'), "spam");
+
+// Evaluate add
+
+assert.equal(evaluateExpression('1+2'), 3);
