@@ -51,4 +51,12 @@ assert.equal(compileCommand('a=1'), 'a = 1;');
 assert.equal(compileExpression('print()'), 'print()');
 assert.equal(compileExpression('print(1)'), 'print(1)');
 
+// Compile call command
+
+assert.equal(compileCommand('print()'), 'print();');
+assert.equal(compileCommand('print(1)'), 'print(1);');
+
+// Compile composite command
+
+assert.equal(compileCommand('print(1);print (2)'), 'print(1); print(2);');
 
