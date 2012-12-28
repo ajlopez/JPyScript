@@ -24,21 +24,31 @@ function compileCommand(text) {
 
 assert.equal(compileExpression("123"), "123");
 
-// Parse string expression
+// Compile string expression
 
 assert.equal(compileExpression('"spam"'), '"spam"');
 
-// Parse add expression
+// Compile variable expression
+
+assert.equal(compileExpression('spam'), 'spam');
+
+// Compile add expression
 
 assert.equal(compileExpression('1+2'), '1 + 2');
 
-// Parse expression command
+// Compile expression command
 
 assert.equal(compileCommand('"spam"'), '"spam";');
 assert.equal(compileCommand('123'), '123;');
 assert.equal(compileCommand('1+2'), '1 + 2;');
 
-// Parse assign command
+// Compile assign command
 
 assert.equal(compileCommand('a=1'), 'a = 1;');
+
+// Compile call expressions
+
+assert.equal(compileExpression('print()'), 'print()');
+assert.equal(compileExpression('print(1)'), 'print(1)');
+
 
