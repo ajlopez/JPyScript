@@ -41,6 +41,10 @@ getToken("spam", "spam", TokenType.Name);
 
 getToken("  spam  ", "spam", TokenType.Name);
 
+// Get name token with comment
+
+getToken("  spam  # this is a comment", "spam", TokenType.Name);
+
 // Get name token with underscores
 
 getToken("__init__", "__init__", TokenType.Name);
