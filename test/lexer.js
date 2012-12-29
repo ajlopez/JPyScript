@@ -95,3 +95,10 @@ getTokens("()[]{},:;", ["(", ")", "[", "]", "{", "}", ",", ":", ";"], TokenType.
 getToken("'spam'", "spam", TokenType.String);
 getToken('"spam"', "spam", TokenType.String);
 
+// Get End of Line
+
+getToken('\n', '\n', TokenType.EndOfLine);
+getToken('\r', '\r', TokenType.EndOfLine);
+getToken('\r\n', '\r\n', TokenType.EndOfLine);
+getTokens('\r\n\r\n', ['\r\n', '\r\n'], TokenType.EndOfLine);
+
