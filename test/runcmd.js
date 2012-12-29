@@ -37,3 +37,19 @@ assert.equal(b, 2);
 eval(compileCommand('a=3\nb = 4'));
 assert.equal(a, 3);
 assert.equal(b, 4);
+
+// Run simple if
+
+eval(compileCommand('a=1; if a<2: a=a+1'));
+assert.equal(a, 2);
+
+// Run simple while
+
+eval(compileCommand('a=1; while a < 10: a=a+1'));
+assert.equal(a, 10);
+
+// Run simple factorial
+
+eval(compileCommand('a=1; n=1; while n < 5:\n  a=a*n\n  n=n+1'));
+assert.equal(n, 5);
+assert.equal(a, 24);
