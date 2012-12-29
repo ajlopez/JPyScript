@@ -26,7 +26,7 @@ assert.equal(compileExpression("123"), "123");
 
 // Compile string expression
 
-assert.equal(compileExpression('"spam"'), '"spam"');
+assert.equal(compileExpression('"spam"'), "'spam'");
 
 // Compile variable expression
 
@@ -38,7 +38,7 @@ assert.equal(compileExpression('1+2'), '1 + 2');
 
 // Compile expression command
 
-assert.equal(compileCommand('"spam"'), '"spam";');
+assert.equal(compileCommand('"spam"'), "'spam';");
 assert.equal(compileCommand('123'), '123;');
 assert.equal(compileCommand('1+2'), '1 + 2;');
 
@@ -94,7 +94,7 @@ while a < 10:\n\
 
 assert.equal(compileExpression('a[1]'), 'getIndex(a, 1)');
 
-// Compile list
+// Compile list as array
 
 assert.equal(compileExpression('[]'), '[]');
 assert.equal(compileExpression('[1,2,3]'), '[1, 2, 3]');
@@ -104,3 +104,7 @@ assert.equal(compileExpression('[a,b,[1,2]]'), '[a, b, [1, 2]]');
 
 assert.equal(compileExpression('a.b'), 'a.b');
 
+// Compile dictionary as object
+
+assert.equal(compileExpression('{}'), '{}');
+assert.equal(compileExpression("{'name': 'Adam', 'age': 800}"), "{'name': 'Adam', 'age': 800}");
