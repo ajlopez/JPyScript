@@ -120,3 +120,32 @@ assert.equal(compileCommand('a/=1'), 'a /= 1;');
 
 assert.equal(compileCommand('for a in b: print(a)'), 'forEach(b, function(a) { print(a); })');
 assert.equal(compileCommand('for item in [1,2,3]: total += item'), 'forEach([1, 2, 3], function(item) { total += item; })');
+
+// Compile composite with indent
+
+assert.equal(compileCommand('\
+n = 1\n\
+total = 1\n\
+while n <= 10:\n\
+  total *= n\n\
+  n += 1\n\
+print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
+
+assert.equal(compileCommand('\
+n = 1\n\
+total = 1\n\
+\n\
+while n <= 10:\n\
+  total *= n\n\
+  n += 1\n\
+print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
+
+assert.equal(compileCommand('\
+n = 1\n\
+total = 1\n\
+\n\
+while n <= 10:\n\
+  total *= n\n\
+  n += 1\n\
+\n\
+print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
