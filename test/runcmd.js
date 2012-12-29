@@ -53,3 +53,9 @@ assert.equal(a, 10);
 eval(compileCommand('a=1; n=1; while n < 5:\n  a=a*n\n  n=n+1'));
 assert.equal(n, 5);
 assert.equal(a, 24);
+
+// Run get index
+
+eval(compileCommand('a=1; n=1; while n < 5:\n  a=a*n\n  n=n+1'));
+assert.equal(n, 5);
+assert.equal(a, 24);

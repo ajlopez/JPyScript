@@ -90,3 +90,6 @@ while a < 10:\n\
     print(a)\n\
 '), 'while (a < 10) { a = a + 1; if (a == 2) { print(a); } }');
 
+// Compile index access
+
+assert.equal(compileExpression('a[1]'), 'getIndex(a, 1)');
