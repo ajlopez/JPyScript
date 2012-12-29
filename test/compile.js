@@ -60,3 +60,11 @@ assert.equal(compileCommand('print(1)'), 'print(1);');
 
 assert.equal(compileCommand('print(1);print (2)'), 'print(1); print(2);');
 assert.equal(compileCommand('print(1)\nprint (2)'), 'print(1); print(2);');
+
+// Compile if with single command
+
+assert.equal(compileCommand('if a > 1: print(1)'), 'if (a > 1) { print(1); }');
+
+// Compile if with two commands
+
+assert.equal(compileCommand('if a > 1: print(1);print(2)'), 'if (a > 1) { print(1); print(2); }');
