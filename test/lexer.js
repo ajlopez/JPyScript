@@ -31,6 +31,11 @@ function getTokens(text, values, type) {
     assert.equal(lexer.nextToken(), null);
 }
 
+function getIndent(text, value) {
+    var lexer = new Lexer(text);
+    assert.equal(lexer.getIndent(), value);
+}
+
 // Lexer defined
 
 assert.ok(py2s.Lexer);
@@ -102,3 +107,13 @@ getToken('\r', '\r', TokenType.EndOfLine);
 getToken('\r\n', '\r\n', TokenType.EndOfLine);
 getTokens('\r\n\r\n', ['\r\n', '\r\n'], TokenType.EndOfLine);
 
+// Get indents
+
+getIndent('', 0);
+getIndent('  ', 2);
+getIndent('\r', 0);
+getIndent('\n', 0);
+getIndent('\r\n', 0);
+getIndent('  \r\n', 0);
+getIndent('if', 0);
+getIndent('  if', 2);

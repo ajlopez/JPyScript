@@ -68,3 +68,7 @@ assert.equal(compileCommand('if a > 1: print(1)'), 'if (a > 1) { print(1); }');
 // Compile if with two commands
 
 assert.equal(compileCommand('if a > 1: print(1);print(2)'), 'if (a > 1) { print(1); print(2); }');
+
+// Compile if with single indented command
+
+assert.equal(compileCommand('if a > 1:\n  print(1)'), 'if (a > 1) { print(1); }');
