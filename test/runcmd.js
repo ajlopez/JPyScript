@@ -28,3 +28,12 @@ eval(compileCommand('b=2*3+4'));
 assert.equal(b, 10);
 eval(compileCommand('b=2*(3+4)'));
 assert.equal(b, 14);
+
+// Run composite commands
+
+eval(compileCommand('a=1; b = 2'));
+assert.equal(a, 1);
+assert.equal(b, 2);
+eval(compileCommand('a=3\nb = 4'));
+assert.equal(a, 3);
+assert.equal(b, 4);
