@@ -10,9 +10,14 @@ assert.equal(py2s.evaluate('123'), 123);
 assert.equal(py2s.evaluate('-123'), -123);
 assert.equal(py2s.evaluate('"spam"'), "spam");
 
+// Arithmetic
+
+assert.equal(py2s.evaluate('1+2'), 3);
+
 // len
 
 assert.equal(py2s.evaluate('len("spam")'), 4);
+assert.equal(py2s.evaluate('len([1,2,3])'), 3);
 
 // Index
 
