@@ -18,3 +18,5 @@ eval(compileCommand('a=1'));
 assert.equal(a, 1);
 eval(compileCommand('b=1+2'));
 assert.equal(b, 3);
+eval(compileCommand('b=1+2-3'));
+assert.equal(b, 0);
