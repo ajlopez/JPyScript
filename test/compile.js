@@ -116,3 +116,6 @@ assert.equal(compileCommand('a-=1'), 'a -= 1;');
 assert.equal(compileCommand('a*=1'), 'a *= 1;');
 assert.equal(compileCommand('a/=1'), 'a /= 1;');
 
+// Compile for in
+
+assert.equal(compileCommand('for a in b: print(a)'), 'forEach(b, function(a) { print(a); }');
