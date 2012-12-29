@@ -93,3 +93,9 @@ while a < 10:\n\
 // Compile index access
 
 assert.equal(compileExpression('a[1]'), 'getIndex(a, 1)');
+
+// Compile list
+
+assert.equal(compileExpression('[]'), '[]');
+assert.equal(compileExpression('[1,2,3]'), '[1, 2, 3]');
+assert.equal(compileExpression('[a,b,[1,2]]'), '[a, b, [1, 2]]');
