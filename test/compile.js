@@ -99,3 +99,8 @@ assert.equal(compileExpression('a[1]'), 'getIndex(a, 1)');
 assert.equal(compileExpression('[]'), '[]');
 assert.equal(compileExpression('[1,2,3]'), '[1, 2, 3]');
 assert.equal(compileExpression('[a,b,[1,2]]'), '[a, b, [1, 2]]');
+
+// Compile dotted name
+
+assert.equal(compileExpression('a.b'), 'a.b');
+

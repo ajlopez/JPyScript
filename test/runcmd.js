@@ -59,3 +59,10 @@ assert.equal(a, 24);
 eval(compileCommand('a=1; n=1; while n < 5:\n  a=a*n\n  n=n+1'));
 assert.equal(n, 5);
 assert.equal(a, 24);
+
+// Run set property
+
+var person = {};
+eval(compileCommand('person.name = "Adam"'));
+assert.ok(person.name);
+assert.equal(person.name, "Adam");
