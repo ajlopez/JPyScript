@@ -117,3 +117,9 @@ getIndent('\r\n', 0);
 getIndent('  \r\n', 0);
 getIndent('if', 0);
 getIndent('  if', 2);
+
+// Get real
+
+getToken('1.23', '1.23', TokenType.Real);
+getTokens('1.23 4.56 7.89', ['1.23', '4.56', '7.89'], TokenType.Real);
+
