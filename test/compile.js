@@ -118,4 +118,5 @@ assert.equal(compileCommand('a/=1'), 'a /= 1;');
 
 // Compile for in
 
-assert.equal(compileCommand('for a in b: print(a)'), 'forEach(b, function(a) { print(a); }');
+assert.equal(compileCommand('for a in b: print(a)'), 'forEach(b, function(a) { print(a); })');
+assert.equal(compileCommand('for item in [1,2,3]: total += item'), 'forEach([1, 2, 3], function(item) { total += item; })');

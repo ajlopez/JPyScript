@@ -66,3 +66,4 @@ var person = {};
 eval(compileCommand('person.name = "Adam"'));
 assert.ok(person.name);
 assert.equal(person.name, "Adam");
+

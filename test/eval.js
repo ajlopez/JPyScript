@@ -21,3 +21,7 @@ assert.equal(py2s.eval('"spam"[1]'), 'p');
 assert.equal(py2s.eval('"spam"[-1]'), 'm');
 assert.equal(py2s.eval('"spam"[-2]'), 'a');
 
+// Global
+
+assert.ok(py2s.eval('global'));
+assert.equal(py2s.eval('global'), global);
