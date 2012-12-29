@@ -59,4 +59,4 @@ assert.equal(compileCommand('print(1)'), 'print(1);');
 // Compile composite command
 
 assert.equal(compileCommand('print(1);print (2)'), 'print(1); print(2);');
-
+assert.equal(compileCommand('print(1)\nprint (2)'), 'print(1); print(2);');
