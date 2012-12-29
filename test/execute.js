@@ -15,3 +15,8 @@ py2s.execute('total = 0; for item in [1,2,3]: total += item');
 assert.equal(py2s.evaluate('total'), 6);
 assert.ok(total);
 assert.equal(total, 6);
+
+py2s.execute("acum = ''; for letter in 'spam':\n  acum += letter\n  acum += '.'");
+assert.equal(py2s.evaluate('acum'), 's.p.a.m.');
+assert.ok(acum);
+assert.equal(acum, 's.p.a.m.');
