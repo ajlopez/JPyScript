@@ -108,3 +108,11 @@ assert.equal(compileExpression('a.b'), 'a.b');
 
 assert.equal(compileExpression('{}'), '{}');
 assert.equal(compileExpression("{'name': 'Adam', 'age': 800}"), "{'name': 'Adam', 'age': 800}");
+
+// Compile extended assignments
+
+assert.equal(compileCommand('a+=1'), 'a += 1;');
+assert.equal(compileCommand('a-=1'), 'a -= 1;');
+assert.equal(compileCommand('a*=1'), 'a *= 1;');
+assert.equal(compileCommand('a/=1'), 'a /= 1;');
+

@@ -89,11 +89,15 @@ getTokens("123 456 789", ["123", "456", "789"], TokenType.Integer);
 
 // Get single char operators
 
-getTokens("+-*/=.><", ["+", "-", "*", "/", "=", ".", ">", "<"], TokenType.Operator);
+getTokens("+-*/.><", ["+", "-", "*", "/", ".", ">", "<"], TokenType.Operator);
 
 // Get two char operators
 
 getTokens("** <= >= == <> !=", ["**", "<=", ">=", "==", "<>", "!="], TokenType.Operator);
+
+// Get assignments
+
+getTokens("= += -= *= /=", ["=", "+=", "-=", "*=", "/="], TokenType.Assignment);
 
 // Get separators
 
