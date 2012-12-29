@@ -72,3 +72,11 @@ assert.equal(compileCommand('if a > 1: print(1);print(2)'), 'if (a > 1) { print(
 // Compile if with single indented command
 
 assert.equal(compileCommand('if a > 1:\n  print(1)'), 'if (a > 1) { print(1); }');
+
+// Compile while with single command
+
+assert.equal(compileCommand('while a < 10: a=a+1'), 'while (a < 10) { a = a + 1; }');
+
+// Compile while with indented commands
+
+assert.equal(compileCommand('while a < 10:\n  a=a+1\n  a=a*2'), 'while (a < 10) { a = a + 1; a = a * 2; }');
