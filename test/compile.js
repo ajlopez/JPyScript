@@ -86,7 +86,7 @@ assert.equal(compileCommand('while a < 10:\n  a=a+1\n  a=a*2'), 'while (a < 10) 
 assert.equal(compileCommand('\
 while a < 10:\n\
   a=a+1\n\
-  if a = 2:\n\
+  if a == 2:\n\
     print(a)\n\
 '), 'while (a < 10) { a = a + 1; if (a == 2) { print(a); } }');
 
