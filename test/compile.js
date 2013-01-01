@@ -170,5 +170,5 @@ print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print
 
 assert.equal(compileExpression('[1,\n2,\n3\n]'), '[1, 2, 3]');
 assert.equal(compileExpression('[1,\r\n2,\r\n3\r\n]'), '[1, 2, 3]');
-assert.equal(compileExpression('[1\n,2\n,n3\n]'), '[1, 2, 3]');
+assert.equal(compileExpression('[1\n,2\n,3\n]'), '[1, 2, 3]');
 assert.equal(compileExpression('[1, #one \n2, #two \n3 #three\n]'), '[1, 2, 3]');
