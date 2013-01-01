@@ -103,6 +103,14 @@ while a < 10:\n\
     print(a)\n\
 '), 'while (a < 10) { a = a + 1; if (a == 2) { print(a); } }');
 
+// Compile while with break
+
+assert.equal(compileCommand('while a < 10:\n  break'), 'while (a < 10) { break; }');
+
+// Compile while with continue
+
+assert.equal(compileCommand('while a < 10:\n  continue'), 'while (a < 10) { continue; }');
+
 // Compile index access
 
 assert.equal(compileExpression('a[1]'), 'getIndex(a, 1)');
