@@ -142,4 +142,3 @@ getTokens("spam\\\n foo\\\n bar\\\n", ["spam", "foo", "bar"], TokenType.Name);
 
 getToken('1.23', '1.23', TokenType.Real);
 getTokens('1.23 4.56 7.89', ['1.23', '4.56', '7.89'], TokenType.Real);
-

@@ -17,7 +17,8 @@ function compileCommand(text) {
     var cmd = parser.parseCommand();
     assert.ok(cmd);
     assert.equal(parser.parseCommand(), null);
-    return cmd.compile();
+    var code = cmd.compile();
+    return code;
 }
 
 // Compile integer expression
@@ -72,6 +73,14 @@ assert.equal(compileCommand('if a > 1: print(1);print(2)'), 'if (a > 1) { print(
 // Compile if with single indented command
 
 assert.equal(compileCommand('if a > 1:\n  print(1)'), 'if (a > 1) { print(1); }');
+
+// Compile if with two single indented command
+
+assert.equal(compileCommand('if a > 1:\n  print(1)\n  print(2)'), 'if (a > 1) { print(1); print(2); }');
+
+// Compile if with else
+
+assert.equal(compileCommand('if a > 1:\n  print(1)\nelse:  print(2)'), 'if (a > 1) { print(1); } else { print(2); }');
 
 // Compile while with single command
 
