@@ -149,3 +149,20 @@ while n <= 10:\n\
   n += 1\n\
 \n\
 print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
+
+// Skipping blank lines
+// http://docs.python.org/3.3/reference/lexical_analysis.html#blank-lines
+
+assert.equal(compileCommand('\
+n = 1\n\
+total = 1\n\
+\n\
+while n <= 10:\n\
+  total *= n\n\
+\n\
+\n\
+  n += 1\n\
+\n\
+\n\
+print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
+
