@@ -197,3 +197,9 @@ assert.equal(compileExpression('[1, #one \n2, #two \n3 #three\n]'), '[1, 2, 3]')
 // Compile if with pass
 
 assert.equal(compileCommand('if a > 1: pass'), 'if (a > 1) {  }');
+
+// Compile def
+
+assert.equal(compileCommand('def f(): pass'), 'function f() {  }');
+assert.equal(compileCommand('def f(): print(1)'), 'function f() { print(1); }');
+assert.equal(compileCommand('def f():\n  print(1)\n  print(2)'), 'function f() { print(1); print(2); }');
