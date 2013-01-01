@@ -205,3 +205,5 @@ assert.equal(compileCommand('def f(): print(1)'), 'function f() { print(1); }');
 assert.equal(compileCommand('def f():\n  print(1)\n  print(2)'), 'function f() { print(1); print(2); }');
 assert.equal(compileCommand('def f(a):\n  print(a)'), 'function f(a) { print(a); }');
 assert.equal(compileCommand('def f(a,b):\n  print(a)\n  print(b)'), 'function f(a, b) { print(a); print(b); }');
+assert.equal(compileCommand('def f(\na\n):\n  print(a)'), 'function f(a) { print(a); }');
+assert.equal(compileCommand('def f(\na,\nb\r\n):\n  print(a)\n  print(b)'), 'function f(a, b) { print(a); print(b); }');
