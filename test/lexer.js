@@ -118,13 +118,25 @@ getTokens('\r\n\r\n', ['\r\n', '\r\n'], TokenType.EndOfLine);
 // Get indents
 
 getIndent('', 0);
-getIndent('  ', 2);
+getIndent('  ', 0);
 getIndent('\r', 0);
 getIndent('\n', 0);
 getIndent('\r\n', 0);
 getIndent('  \r\n', 0);
 getIndent('if', 0);
 getIndent('  if', 2);
+
+// http://docs.python.org/3.3/reference/lexical_analysis.html#blank-lines
+
+getIndent('\r\n  if', 2);
+getIndent('\n  if', 2);
+getIndent('\r\n\r\n  if', 2);
+getIndent('\r\n \r\n  if', 2);
+
+// http://docs.python.org/3.3/reference/lexical_analysis.html#explicit-line-joining
+
+getTokens("123\\\n 456\\\n 789\\\n", ["123", "456", "789"], TokenType.Integer);
+getTokens("spam\\\n foo\\\n bar\\\n", ["spam", "foo", "bar"], TokenType.Name);
 
 // Get real
 
