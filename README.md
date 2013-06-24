@@ -1,4 +1,4 @@
-# Py2Script
+# JPyScript
 
 Python language compiler to Javascript. Work in Progress
 
@@ -6,13 +6,12 @@ Python language compiler to Javascript. Work in Progress
 
 TBD
 
-
 ## Usage
 
 Reference in your program:
 
 ```js
-var py2script = require('py2script');
+var jpyscript = require('jpyscript');
 ```
 
 TBD
@@ -20,8 +19,8 @@ TBD
 ## Development
 
 ```
-git clone git://github.com/ajlopez/Py2Script.git
-cd Py2Script
+git clone git://github.com/ajlopez/JPyScript.git
+cd JPyScript
 npm install
 npm test
 ```
@@ -38,10 +37,14 @@ TBD
 
 TBD
 
+## License
+
+MIT
+
 ## Contribution
 
-Feel free to [file issues](https://github.com/ajlopez/Py2Script) and submit
-[pull requests](https://github.com/ajlopez/Py2Script/pulls) — contributions are
+Feel free to [file issues](https://github.com/ajlopez/JPyScript) and submit
+[pull requests](https://github.com/ajlopez/JPyScript/pulls) — contributions are
 welcome.
 
 If you submit a pull request, please be sure to add or update corresponding

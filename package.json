@@ -1,10 +1,10 @@
-{ "name": "py2script"
+{ "name": "jpyscript"
 , "description": "Python compiler to JavaScript"
 , "keywords": [ "python", "interpreter", "compiler", "javascript" ]
 , "version": "0.0.1alpha"
 , "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)"
-, "repository": { "type": "git", "url": "git://github.com/ajlopez/Py2Script.git" }
-, "main": "./lib/py2script.js"
+, "repository": { "type": "git", "url": "git://github.com/ajlopez/JPyScript.git" }
+, "main": "./lib/jpyscript.js"
 , "engines": { "node": ">= 0.6.0 && < 0.9.0" }
 , "scripts": {
     "test": "node ./test.js"

@@ -1,10 +1,10 @@
 
-var py2script = require('../..'),
+var jpyscript = require('../..'),
     fs = require('fs');
     
 function executeFile(filename) {
     var text = fs.readFileSync(filename).toString();
-    py2script.execute(text);
+    jpyscript.execute(text);
 };
 
 process.argv.forEach(function(val) {
