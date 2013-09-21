@@ -35,7 +35,7 @@ TBD
 
 ## References
 
-TBD
+- [Why Are There So Many Pythons?](http://www.toptal.com/python/why-are-there-so-many-pythons)
 
 ## License
 
