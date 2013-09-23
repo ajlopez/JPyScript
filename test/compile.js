@@ -1,209 +1,207 @@
 
-var py2s = require('../'),
-    assert = require('assert');
+var py2s = require('../');
 
-assert.ok(py2s.Parser);
-
-function compileExpression(text) {
+function compileExpression(test, text) {
     var parser = new py2s.Parser(text);
     var expr = parser.parseExpression();
-    assert.ok(expr);
-    assert.equal(parser.parseExpression(), null);
+    test.ok(expr);
+    test.equal(parser.parseExpression(), null);
     return expr.compile();
 }
 
-function compileCommand(text) {
+function compileCommand(test, text) {
     var parser = new py2s.Parser(text);
     var cmd = parser.parseCommand();
-    assert.ok(cmd);
-    assert.equal(parser.parseCommand(), null);
+    test.ok(cmd);
+    test.equal(parser.parseCommand(), null);
     var code = cmd.compile();
     return code;
 }
 
-// Compile integer expression
+exports['Compile integer expression'] = function (test) {
+    test.equal(compileExpression(test, "123"), "123");
+}
 
-assert.equal(compileExpression("123"), "123");
+exports['Compile string expression'] = function (test) {
+    test.equal(compileExpression(test, '"spam"'), "'spam'");
+}
 
-// Compile string expression
+exports['Compile variable expression'] = function (test) {
+    test.equal(compileExpression(test, 'spam'), 'spam');
+}
 
-assert.equal(compileExpression('"spam"'), "'spam'");
+exports['Compile add expression'] = function (test) {
+    test.equal(compileExpression(test, '1+2'), '1 + 2');
+}
 
-// Compile variable expression
+exports['Compile expression command'] = function (test) {
+    test.equal(compileCommand(test, '"spam"'), "'spam';");
+    test.equal(compileCommand(test, '123'), '123;');
+    test.equal(compileCommand(test, '1+2'), '1 + 2;');
+}
 
-assert.equal(compileExpression('spam'), 'spam');
+exports['Compile assign command'] = function (test) {
+    test.equal(compileCommand(test, 'a=1'), 'a = 1;');
+}
 
-// Compile add expression
+exports['Compile call expressions'] = function (test) {
+    test.equal(compileExpression(test, 'print()'), 'print()');
+    test.equal(compileExpression(test, 'print(1)'), 'print(1)');
+}
 
-assert.equal(compileExpression('1+2'), '1 + 2');
+exports['Compile call command'] = function (test) {
+    test.equal(compileCommand(test, 'print()'), 'print();');
+    test.equal(compileCommand(test, 'print(1)'), 'print(1);');
+}
 
-// Compile expression command
+exports['Compile composite command'] = function (test) {
+    test.equal(compileCommand(test, 'print(1);print (2)'), 'print(1); print(2);');
+    test.equal(compileCommand(test, 'print(1)\nprint (2)'), 'print(1); print(2);');
+}
 
-assert.equal(compileCommand('"spam"'), "'spam';");
-assert.equal(compileCommand('123'), '123;');
-assert.equal(compileCommand('1+2'), '1 + 2;');
+exports['Compile if with single command'] = function (test) {
+    test.equal(compileCommand(test, 'if a > 1: print(1)'), 'if (a > 1) { print(1); }');
+}
 
-// Compile assign command
+exports['Compile if with two commands'] = function (test) {
+    test.equal(compileCommand(test, 'if a > 1: print(1);print(2)'), 'if (a > 1) { print(1); print(2); }');
+}
 
-assert.equal(compileCommand('a=1'), 'a = 1;');
+exports['Compile if with single indented command'] = function (test) {
+    test.equal(compileCommand(test, 'if a > 1:\n  print(1)'), 'if (a > 1) { print(1); }');    
+}
 
-// Compile call expressions
+exports['Compile if with two single indented command'] = function (test) {
+    test.equal(compileCommand(test, 'if a > 1:\n  print(1)\n  print(2)'), 'if (a > 1) { print(1); print(2); }');
+}
 
-assert.equal(compileExpression('print()'), 'print()');
-assert.equal(compileExpression('print(1)'), 'print(1)');
+exports['Compile if with else'] = function (test) {
+    test.equal(compileCommand(test, 'if a > 1:\n  print(1)\nelse:  print(2)'), 'if (a > 1) { print(1); } else { print(2); }');
+}
 
-// Compile call command
+exports['Compile if with else with indent'] = function (test) {
+    test.equal(compileCommand(test, 'if a > 1:\n  print(1)\nelse:\n  print(2)'), 'if (a > 1) { print(1); } else { print(2); }');
+}
 
-assert.equal(compileCommand('print()'), 'print();');
-assert.equal(compileCommand('print(1)'), 'print(1);');
+exports['Compile while with single command'] = function (test) {
+    test.equal(compileCommand(test, 'while a < 10: a=a+1'), 'while (a < 10) { a = a + 1; }');
+}
 
-// Compile composite command
+exports['Compile while with indented commands'] = function (test) {
+    test.equal(compileCommand(test, 'while a < 10:\n  a=a+1\n  a=a*2'), 'while (a < 10) { a = a + 1; a = a * 2; }');
+}
 
-assert.equal(compileCommand('print(1);print (2)'), 'print(1); print(2);');
-assert.equal(compileCommand('print(1)\nprint (2)'), 'print(1); print(2);');
+exports['Compile while with internal if'] = function (test) {
+    test.equal(compileCommand(test, '\
+    while a < 10:\n\
+      a=a+1\n\
+      if a == 2:\n\
+        print(a)\n\
+    '), 'while (a < 10) { a = a + 1; if (a == 2) { print(a); } }');
+    }
 
-// Compile if with single command
+    exports['Compile while with break'] = function (test) {
+    test.equal(compileCommand(test, 'while a < 10:\n  break'), 'while (a < 10) { break; }');
+}
 
-assert.equal(compileCommand('if a > 1: print(1)'), 'if (a > 1) { print(1); }');
+exports['Compile while with continue'] = function (test) {
+    test.equal(compileCommand(test, 'while a < 10:\n  continue'), 'while (a < 10) { continue; }');
+}
 
-// Compile if with two commands
+exports['Compile index access'] = function (test) {
+    test.equal(compileExpression(test, 'a[1]'), 'getIndex(a, 1)');
+}
 
-assert.equal(compileCommand('if a > 1: print(1);print(2)'), 'if (a > 1) { print(1); print(2); }');
+exports['Compile list as array'] = function (test) {
+    test.equal(compileExpression(test, '[]'), '[]');
+    test.equal(compileExpression(test, '[1,2,3]'), '[1, 2, 3]');
+    test.equal(compileExpression(test, '[a,b,[1,2]]'), '[a, b, [1, 2]]');
+}
 
-// Compile if with single indented command
+exports['Compile dotted name'] = function (test) {
+    test.equal(compileExpression(test, 'a.b'), 'a.b');
+}
 
-assert.equal(compileCommand('if a > 1:\n  print(1)'), 'if (a > 1) { print(1); }');
+exports['Compile dictionary as object'] = function (test) {
+    test.equal(compileExpression(test, '{}'), '{}');
+    test.equal(compileExpression(test, "{'name': 'Adam', 'age': 800}"), "{'name': 'Adam', 'age': 800}");
+}
 
-// Compile if with two single indented command
+exports['Compile extended assignments'] = function (test) {
+    test.equal(compileCommand(test, 'a+=1'), 'a += 1;');
+    test.equal(compileCommand(test, 'a-=1'), 'a -= 1;');
+    test.equal(compileCommand(test, 'a*=1'), 'a *= 1;');
+    test.equal(compileCommand(test, 'a/=1'), 'a /= 1;');
+}
 
-assert.equal(compileCommand('if a > 1:\n  print(1)\n  print(2)'), 'if (a > 1) { print(1); print(2); }');
+exports['Compile for in'] = function (test) {
+    test.equal(compileCommand(test, 'for a in b: print(a)'), 'forEach(b, function(a) { print(a); })');
+    test.equal(compileCommand(test, 'for item in [1,2,3]: total += item'), 'forEach([1, 2, 3], function(item) { total += item; })');
+}
 
-// Compile if with else
+exports['Compile composite with indent'] = function (test) {
+    test.equal(compileCommand(test, '\
+    n = 1\n\
+    total = 1\n\
+    while n <= 10:\n\
+      total *= n\n\
+      n += 1\n\
+    print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
 
-assert.equal(compileCommand('if a > 1:\n  print(1)\nelse:  print(2)'), 'if (a > 1) { print(1); } else { print(2); }');
+    test.equal(compileCommand(test, '\
+    n = 1\n\
+    total = 1\n\
+    \n\
+    while n <= 10:\n\
+      total *= n\n\
+      n += 1\n\
+    print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
 
-// Compile if with else with indent
+    test.equal(compileCommand(test, '\
+    n = 1\n\
+    total = 1\n\
+    \n\
+    while n <= 10:\n\
+      total *= n\n\
+      n += 1\n\
+    \n\
+    print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
+}
 
-assert.equal(compileCommand('if a > 1:\n  print(1)\nelse:\n  print(2)'), 'if (a > 1) { print(1); } else { print(2); }');
+exports['Skipping blank lines'] = function (test) {
+    // http://docs.python.org/3.3/reference/lexical_analysis.html#blank-lines
+    test.equal(compileCommand(test, '\
+    n = 1\n\
+    total = 1\n\
+    \n\
+    while n <= 10:\n\
+      total *= n\n\
+    \n\
+    \n\
+      n += 1\n\
+    \n\
+    \n\
+    print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
 
-// Compile while with single command
+    // http://docs.python.org/3.3/reference/lexical_analysis.html#implicit-line-joining
 
-assert.equal(compileCommand('while a < 10: a=a+1'), 'while (a < 10) { a = a + 1; }');
+    test.equal(compileExpression(test, '[1,\n2,\n3\n]'), '[1, 2, 3]');
+    test.equal(compileExpression(test, '[1,\r\n2,\r\n3\r\n]'), '[1, 2, 3]');
+    test.equal(compileExpression(test, '[1\n,2\n,3\n]'), '[1, 2, 3]');
+    test.equal(compileExpression(test, '[1, #one \n2, #two \n3 #three\n]'), '[1, 2, 3]');
+}
 
-// Compile while with indented commands
+exports['Compile if with pass'] = function (test) {
+    test.equal(compileCommand(test, 'if a > 1: pass'), 'if (a > 1) {  }');
+}
 
-assert.equal(compileCommand('while a < 10:\n  a=a+1\n  a=a*2'), 'while (a < 10) { a = a + 1; a = a * 2; }');
+exports['Compile def'] = function (test) {
+    test.equal(compileCommand(test, 'def f(): pass'), 'function f() {  }');
+    test.equal(compileCommand(test, 'def f(): print(1)'), 'function f() { print(1); }');
+    test.equal(compileCommand(test, 'def f():\n  print(1)\n  print(2)'), 'function f() { print(1); print(2); }');
+    test.equal(compileCommand(test, 'def f(a):\n  print(a)'), 'function f(a) { print(a); }');
+    test.equal(compileCommand(test, 'def f(a,b):\n  print(a)\n  print(b)'), 'function f(a, b) { print(a); print(b); }');
+    test.equal(compileCommand(test, 'def f(\na\n):\n  print(a)'), 'function f(a) { print(a); }');
+    test.equal(compileCommand(test, 'def f(\na,\nb\r\n):\n  print(a)\n  print(b)'), 'function f(a, b) { print(a); print(b); }');
+}
 
-// Compile while with internal if
-
-assert.equal(compileCommand('\
-while a < 10:\n\
-  a=a+1\n\
-  if a == 2:\n\
-    print(a)\n\
-'), 'while (a < 10) { a = a + 1; if (a == 2) { print(a); } }');
-
-// Compile while with break
-
-assert.equal(compileCommand('while a < 10:\n  break'), 'while (a < 10) { break; }');
-
-// Compile while with continue
-
-assert.equal(compileCommand('while a < 10:\n  continue'), 'while (a < 10) { continue; }');
-
-// Compile index access
-
-assert.equal(compileExpression('a[1]'), 'getIndex(a, 1)');
-
-// Compile list as array
-
-assert.equal(compileExpression('[]'), '[]');
-assert.equal(compileExpression('[1,2,3]'), '[1, 2, 3]');
-assert.equal(compileExpression('[a,b,[1,2]]'), '[a, b, [1, 2]]');
-
-// Compile dotted name
-
-assert.equal(compileExpression('a.b'), 'a.b');
-
-// Compile dictionary as object
-
-assert.equal(compileExpression('{}'), '{}');
-assert.equal(compileExpression("{'name': 'Adam', 'age': 800}"), "{'name': 'Adam', 'age': 800}");
-
-// Compile extended assignments
-
-assert.equal(compileCommand('a+=1'), 'a += 1;');
-assert.equal(compileCommand('a-=1'), 'a -= 1;');
-assert.equal(compileCommand('a*=1'), 'a *= 1;');
-assert.equal(compileCommand('a/=1'), 'a /= 1;');
-
-// Compile for in
-
-assert.equal(compileCommand('for a in b: print(a)'), 'forEach(b, function(a) { print(a); })');
-assert.equal(compileCommand('for item in [1,2,3]: total += item'), 'forEach([1, 2, 3], function(item) { total += item; })');
-
-// Compile composite with indent
-
-assert.equal(compileCommand('\
-n = 1\n\
-total = 1\n\
-while n <= 10:\n\
-  total *= n\n\
-  n += 1\n\
-print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
-
-assert.equal(compileCommand('\
-n = 1\n\
-total = 1\n\
-\n\
-while n <= 10:\n\
-  total *= n\n\
-  n += 1\n\
-print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
-
-assert.equal(compileCommand('\
-n = 1\n\
-total = 1\n\
-\n\
-while n <= 10:\n\
-  total *= n\n\
-  n += 1\n\
-\n\
-print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
-
-// Skipping blank lines
-// http://docs.python.org/3.3/reference/lexical_analysis.html#blank-lines
-
-assert.equal(compileCommand('\
-n = 1\n\
-total = 1\n\
-\n\
-while n <= 10:\n\
-  total *= n\n\
-\n\
-\n\
-  n += 1\n\
-\n\
-\n\
-print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
-
-// http://docs.python.org/3.3/reference/lexical_analysis.html#implicit-line-joining
-
-assert.equal(compileExpression('[1,\n2,\n3\n]'), '[1, 2, 3]');
-assert.equal(compileExpression('[1,\r\n2,\r\n3\r\n]'), '[1, 2, 3]');
-assert.equal(compileExpression('[1\n,2\n,3\n]'), '[1, 2, 3]');
-assert.equal(compileExpression('[1, #one \n2, #two \n3 #three\n]'), '[1, 2, 3]');
-
-// Compile if with pass
-
-assert.equal(compileCommand('if a > 1: pass'), 'if (a > 1) {  }');
-
-// Compile def
-
-assert.equal(compileCommand('def f(): pass'), 'function f() {  }');
-assert.equal(compileCommand('def f(): print(1)'), 'function f() { print(1); }');
-assert.equal(compileCommand('def f():\n  print(1)\n  print(2)'), 'function f() { print(1); print(2); }');
-assert.equal(compileCommand('def f(a):\n  print(a)'), 'function f(a) { print(a); }');
-assert.equal(compileCommand('def f(a,b):\n  print(a)\n  print(b)'), 'function f(a, b) { print(a); print(b); }');
-assert.equal(compileCommand('def f(\na\n):\n  print(a)'), 'function f(a) { print(a); }');
-assert.equal(compileCommand('def f(\na,\nb\r\n):\n  print(a)\n  print(b)'), 'function f(a, b) { print(a); print(b); }');
