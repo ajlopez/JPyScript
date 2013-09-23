@@ -1,21 +1,18 @@
 
-var py2s = require('../'),
-    assert = require('assert');
+var py2s = require('../');
 
-assert.ok(py2s.Parser);
-
-function parseExpression(text) {
+function parseExpression(test, text) {
     var parser = new py2s.Parser(text);
     var expr = parser.parseExpression();
-    assert.ok(expr);
-    assert.equal(parser.parseExpression(), null);
+    test.ok(expr);
+    test.equal(parser.parseExpression(), null);
     return expr;
 }
 
-// Parse integer expression
+exports['Parse integer expression'] = function (test) {
+    parseExpression(test, "123");
+}
 
-parseExpression("123");
-
-// Parse string expression
-
-parseExpression('"spam"');
+exports['Parse string expression'] = function (test) {
+    parseExpression(test, '"spam"');
+}

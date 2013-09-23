@@ -1,32 +1,30 @@
 
-var py2s = require('../'),
-    assert = require('assert');
+var py2s = require('../');
 
-assert.ok(py2s.evaluate);
+exports['Simple'] = function (test) {
+    test.equal(py2s.evaluate('123'), 123);
+    test.equal(py2s.evaluate('-123'), -123);
+    test.equal(py2s.evaluate('"spam"'), "spam");
+}
 
-// Simple
+exports['Arithmetic'] = function (test) {
+    test.equal(py2s.evaluate('1+2'), 3);
+}
 
-assert.equal(py2s.evaluate('123'), 123);
-assert.equal(py2s.evaluate('-123'), -123);
-assert.equal(py2s.evaluate('"spam"'), "spam");
+exports['len'] = function (test) {
+    test.equal(py2s.evaluate('len("spam")'), 4);
+    test.equal(py2s.evaluate('len([1,2,3])'), 3);
+}
 
-// Arithmetic
+exports['Index'] = function (test) {
+    test.equal(py2s.evaluate('"spam"[0]'), 's');
+    test.equal(py2s.evaluate('"spam"[1]'), 'p');
+    test.equal(py2s.evaluate('"spam"[-1]'), 'm');
+    test.equal(py2s.evaluate('"spam"[-2]'), 'a');
+}
 
-assert.equal(py2s.evaluate('1+2'), 3);
+exports['Global'] = function (test) {
+    test.ok(py2s.evaluate('global'));
+    test.equal(py2s.evaluate('global'), global);
+}
 
-// len
-
-assert.equal(py2s.evaluate('len("spam")'), 4);
-assert.equal(py2s.evaluate('len([1,2,3])'), 3);
-
-// Index
-
-assert.equal(py2s.evaluate('"spam"[0]'), 's');
-assert.equal(py2s.evaluate('"spam"[1]'), 'p');
-assert.equal(py2s.evaluate('"spam"[-1]'), 'm');
-assert.equal(py2s.evaluate('"spam"[-2]'), 'a');
-
-// Global
-
-assert.ok(py2s.evaluate('global'));
-assert.equal(py2s.evaluate('global'), global);
