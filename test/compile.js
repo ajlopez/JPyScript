@@ -22,6 +22,14 @@ exports['Compile integer expression'] = function (test) {
     test.equal(compileExpression(test, "123"), "123");
 }
 
+exports['Compile negative integer expression'] = function (test) {
+    test.equal(compileExpression(test, "-123"), "-123");
+}
+
+exports['Compile negative real expression'] = function (test) {
+    test.equal(compileExpression(test, "-123.45"), "-123.45");
+}
+
 exports['Compile string expression'] = function (test) {
     test.equal(compileExpression(test, '"spam"'), "'spam'");
 }
