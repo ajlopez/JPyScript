@@ -62,88 +62,86 @@ exports['Get name token with comment'] = function (test) {
     getToken(test, "  spam  # this is a comment", "spam", TokenType.Name);
 }
 
-
-
 exports['Get name token with underscores'] = function (test) {
-getToken(test, "__init__", "__init__", TokenType.Name);
+    getToken(test, "__init__", "__init__", TokenType.Name);
 }
 
 exports['Get name token with digits'] = function (test) {
-getToken(test, "spam123", "spam123", TokenType.Name);
+    getToken(test, "spam123", "spam123", TokenType.Name);
 }
 
 exports['Get integer'] = function (test) {
-getToken(test, "123", "123", TokenType.Integer);
+    getToken(test, "123", "123", TokenType.Integer);
 }
 
 exports['Get integer with spaces'] = function (test) {
-getToken(test, "   123   ", "123", TokenType.Integer);
+    getToken(test, "   123   ", "123", TokenType.Integer);
 }
 
 exports['Get three names'] = function (test) {
-getTokens(test, "spam foo bar", ["spam", "foo", "bar"], TokenType.Name);
+    getTokens(test, "spam foo bar", ["spam", "foo", "bar"], TokenType.Name);
 }
 
 exports['Get three integers'] = function (test) {
-getTokens(test, "123 456 789", ["123", "456", "789"], TokenType.Integer);
+    getTokens(test, "123 456 789", ["123", "456", "789"], TokenType.Integer);
 }
 
 exports['Get single char operators'] = function (test) {
-getTokens(test, "+-*/.><", ["+", "-", "*", "/", ".", ">", "<"], TokenType.Operator);
+    getTokens(test, "+-*/.><", ["+", "-", "*", "/", ".", ">", "<"], TokenType.Operator);
 }
 
 exports['Get two char operators'] = function (test) {
-getTokens(test, "** <= >= == <> !=", ["**", "<=", ">=", "==", "<>", "!="], TokenType.Operator);
+    getTokens(test, "** <= >= == <> !=", ["**", "<=", ">=", "==", "<>", "!="], TokenType.Operator);
 }
 
 exports['Get assignments'] = function (test) {
-getTokens(test, "= += -= *= /=", ["=", "+=", "-=", "*=", "/="], TokenType.Assignment);
+    getTokens(test, "= += -= *= /=", ["=", "+=", "-=", "*=", "/="], TokenType.Assignment);
 }
 
 exports['Get separators'] = function (test) {
-getTokens(test, "()[]{},:;", ["(", ")", "[", "]", "{", "}", ",", ":", ";"], TokenType.Separator);
+    getTokens(test, "()[]{},:;", ["(", ")", "[", "]", "{", "}", ",", ":", ";"], TokenType.Separator);
 }
 
 exports['Get string'] = function (test) {
-getToken(test, "'spam'", "spam", TokenType.String);
-getToken(test, '"spam"', "spam", TokenType.String);
+    getToken(test, "'spam'", "spam", TokenType.String);
+    getToken(test, '"spam"', "spam", TokenType.String);
 }
 
 exports['Get End of Line'] = function (test) {
-getToken(test, '\n', '\n', TokenType.EndOfLine);
-getToken(test, '\r', '\r', TokenType.EndOfLine);
-getToken(test, '\r\n', '\r\n', TokenType.EndOfLine);
-getTokens(test, '\r\n\r\n', ['\r\n', '\r\n'], TokenType.EndOfLine);
+    getToken(test, '\n', '\n', TokenType.EndOfLine);
+    getToken(test, '\r', '\r', TokenType.EndOfLine);
+    getToken(test, '\r\n', '\r\n', TokenType.EndOfLine);
+    getTokens(test, '\r\n\r\n', ['\r\n', '\r\n'], TokenType.EndOfLine);
 }
 
 exports['Get indents'] = function (test) {
-getIndent(test, '', 0);
-getIndent(test, '  ', 0);
-getIndent(test, '\r', 0);
-getIndent(test, '\n', 0);
-getIndent(test, '\r\n', 0);
-getIndent(test, '  \r\n', 0);
-getIndent(test, 'if', 0);
-getIndent(test, '  if', 2);
+    getIndent(test, '', 0);
+    getIndent(test, '  ', 0);
+    getIndent(test, '\r', 0);
+    getIndent(test, '\n', 0);
+    getIndent(test, '\r\n', 0);
+    getIndent(test, '  \r\n', 0);
+    getIndent(test, 'if', 0);
+    getIndent(test, '  if', 2);
 }
 
 exports['Blank lines'] = function (test) {
 // http://docs.python.org/3.3/reference/lexical_analysis.html#blank-lines
 
-getIndent(test, '\r\n  if', 2);
-getIndent(test, '\n  if', 2);
-getIndent(test, '\r\n\r\n  if', 2);
-getIndent(test, '\r\n \r\n  if', 2);
+    getIndent(test, '\r\n  if', 2);
+    getIndent(test, '\n  if', 2);
+    getIndent(test, '\r\n\r\n  if', 2);
+    getIndent(test, '\r\n \r\n  if', 2);
 }
 
 exports['Explicit line joining'] = function (test) {
 // http://docs.python.org/3.3/reference/lexical_analysis.html#explicit-line-joining
 
-getTokens(test, "123\\\n 456\\\n 789\\\n", ["123", "456", "789"], TokenType.Integer);
-getTokens(test, "spam\\\n foo\\\n bar\\\n", ["spam", "foo", "bar"], TokenType.Name);
+    getTokens(test, "123\\\n 456\\\n 789\\\n", ["123", "456", "789"], TokenType.Integer);
+    getTokens(test, "spam\\\n foo\\\n bar\\\n", ["spam", "foo", "bar"], TokenType.Name);
 }
 
 exports['Get real'] = function (test) {
-getToken(test, '1.23', '1.23', TokenType.Real);
-getTokens(test, '1.23 4.56 7.89', ['1.23', '4.56', '7.89'], TokenType.Real);
+    getToken(test, '1.23', '1.23', TokenType.Real);
+    getTokens(test, '1.23 4.56 7.89', ['1.23', '4.56', '7.89'], TokenType.Real);
 }
