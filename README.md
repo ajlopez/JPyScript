@@ -42,6 +42,9 @@ TBD
 - [Notes on Python variable scope](http://www.saltycrane.com/blog/2008/01/python-variable-scope-notes/)
 - [Python Variable Scope](http://gettingstartedwithpython.blogspot.com.ar/2012/05/variable-scope.html)
 - [Python variable scope question](http://stackoverflow.com/questions/370357/python-variable-scope-question)
+- [Python: How to make a cross-module variable?](http://stackoverflow.com/questions/142545/python-how-to-make-a-cross-module-variable)
+- [Python exec](http://docs.python.org/2.0/ref/exec.html)
+- [PyPy.js: First Steps](http://www.rfk.id.au/blog/entry/pypy-js-first-steps/)
 
 ## License
 

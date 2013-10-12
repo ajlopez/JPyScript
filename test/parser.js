@@ -1,8 +1,8 @@
 
-var py2s = require('../');
+var jpyparser = require('../lib/jpyparser.js');
 
 function parseExpression(test, text) {
-    var parser = new py2s.Parser(text);
+    var parser = jpyparser.createParser(text);
     var expr = parser.parseExpression();
     test.ok(expr);
     test.equal(parser.parseExpression(), null);

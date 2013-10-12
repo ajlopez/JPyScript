@@ -1,8 +1,8 @@
 
-var py2s = require('../');
+var jpyparser = require('../lib/jpyparser');
 
 function compileExpression(test, text) {
-    var parser = new py2s.Parser(text);
+    var parser = jpyparser.createParser(text);
     var expr = parser.parseExpression();
     test.ok(expr);
     test.equal(parser.parseExpression(), null);
@@ -10,7 +10,7 @@ function compileExpression(test, text) {
 }
 
 function compileCommand(test, text) {
-    var parser = new py2s.Parser(text);
+    var parser = jpyparser.createParser(text);
     var cmd = parser.parseCommand();
     test.ok(cmd);
     test.equal(parser.parseCommand(), null);

@@ -1,8 +1,8 @@
 
-var py2s = require('../');
+var jpyparser = require('../lib/jpyparser');
 
 function compileCommand(test, text) {
-    var parser = new py2s.Parser(text);
+    var parser = jpyparser.createParser(text);
     var cmd = parser.parseCommand();
     test.ok(cmd);
     test.equal(parser.parseCommand(), null);
