@@ -217,3 +217,8 @@ exports['Compile def with local variables'] = function (test) {
     test.equal(compileCommand(test, 'def f(): a = 1'), 'function f() { var a; a = 1; }');
     test.equal(compileCommand(test, 'def f():\n  a = 1\n  b = 2'), 'function f() { var a; var b; a = 1; b = 2; }');
 }
+
+exports['Compile def with local variables and module variables'] = function (test) {
+    test.equal(compileCommand(test, 'a = 2; def f(): a = 1'), 'var a; a = 2; function f() { var a; a = 1; }');
+    test.equal(compileCommand(test, 'b = 1; def f():\n  a = b'), 'var b; b = 1; function f() { var a; a = b; }');
+}
