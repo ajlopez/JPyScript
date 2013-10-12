@@ -213,3 +213,7 @@ exports['Compile def'] = function (test) {
     test.equal(compileCommand(test, 'def f(\na,\nb\r\n):\n  print(a)\n  print(b)'), 'function f(a, b) { print(a); print(b); }');
 }
 
+exports['Compile def with local variables'] = function (test) {
+    test.equal(compileCommand(test, 'def f(): a = 1'), 'function f() { var a; a = 1; }');
+    test.equal(compileCommand(test, 'def f():\n  a = 1\n  b = 2'), 'function f() { var a; var b; a = 1; b = 2; }');
+}
