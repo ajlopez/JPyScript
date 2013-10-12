@@ -52,6 +52,10 @@ exports['Compile assign command'] = function (test) {
     test.equal(compileCommand(test, 'a=1'), 'var a; a = 1;');
 }
 
+exports['Compile return command'] = function (test) {
+    test.equal(compileCommand(test, 'return 1'), 'return 1;');
+}
+
 exports['Compile call expressions'] = function (test) {
     test.equal(compileExpression(test, 'print()'), 'print()');
     test.equal(compileExpression(test, 'print(1)'), 'print(1)');
