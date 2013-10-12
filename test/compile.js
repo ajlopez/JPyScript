@@ -14,7 +14,7 @@ function compileCommand(test, text) {
     var cmd = parser.parseCommand();
     test.ok(cmd);
     test.equal(parser.parseCommand(), null);
-    var code = cmd.compile();
+    var code = cmd.compile(true);
     return code;
 }
 
@@ -49,7 +49,7 @@ exports['Compile expression command'] = function (test) {
 }
 
 exports['Compile assign command'] = function (test) {
-    test.equal(compileCommand(test, 'a=1'), 'a = 1;');
+    test.equal(compileCommand(test, 'a=1'), 'var a; a = 1;');
 }
 
 exports['Compile call expressions'] = function (test) {
@@ -92,11 +92,11 @@ exports['Compile if with else with indent'] = function (test) {
 }
 
 exports['Compile while with single command'] = function (test) {
-    test.equal(compileCommand(test, 'while a < 10: a=a+1'), 'while (a < 10) { a = a + 1; }');
+    test.equal(compileCommand(test, 'while a < 10: a=a+1'), 'var a; while (a < 10) { a = a + 1; }');
 }
 
 exports['Compile while with indented commands'] = function (test) {
-    test.equal(compileCommand(test, 'while a < 10:\n  a=a+1\n  a=a*2'), 'while (a < 10) { a = a + 1; a = a * 2; }');
+    test.equal(compileCommand(test, 'while a < 10:\n  a=a+1\n  a=a*2'), 'var a; while (a < 10) { a = a + 1; a = a * 2; }');
 }
 
 exports['Compile while with internal if'] = function (test) {
@@ -105,7 +105,7 @@ exports['Compile while with internal if'] = function (test) {
       a=a+1\n\
       if a == 2:\n\
         print(a)\n\
-    '), 'while (a < 10) { a = a + 1; if (a == 2) { print(a); } }');
+    '), 'var a; while (a < 10) { a = a + 1; if (a == 2) { print(a); } }');
     }
 
     exports['Compile while with break'] = function (test) {
@@ -136,15 +136,15 @@ exports['Compile dictionary as object'] = function (test) {
 }
 
 exports['Compile extended assignments'] = function (test) {
-    test.equal(compileCommand(test, 'a+=1'), 'a += 1;');
-    test.equal(compileCommand(test, 'a-=1'), 'a -= 1;');
-    test.equal(compileCommand(test, 'a*=1'), 'a *= 1;');
-    test.equal(compileCommand(test, 'a/=1'), 'a /= 1;');
+    test.equal(compileCommand(test, 'a+=1'), 'var a; a += 1;');
+    test.equal(compileCommand(test, 'a-=1'), 'var a; a -= 1;');
+    test.equal(compileCommand(test, 'a*=1'), 'var a; a *= 1;');
+    test.equal(compileCommand(test, 'a/=1'), 'var a; a /= 1;');
 }
 
 exports['Compile for in'] = function (test) {
-    test.equal(compileCommand(test, 'for a in b: print(a)'), 'forEach(b, function(a) { print(a); })');
-    test.equal(compileCommand(test, 'for item in [1,2,3]: total += item'), 'forEach([1, 2, 3], function(item) { total += item; })');
+    test.equal(compileCommand(test, 'for a in b: print(a)'), 'var a; forEach(b, function($item) { a = $item; print(a); })');
+    test.equal(compileCommand(test, 'for item in [1,2,3]: total += item'), 'var item; var total; forEach([1, 2, 3], function($item) { item = $item; total += item; })');
 }
 
 exports['Compile composite with indent'] = function (test) {
@@ -154,7 +154,7 @@ exports['Compile composite with indent'] = function (test) {
     while n <= 10:\n\
       total *= n\n\
       n += 1\n\
-    print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
+    print(total)'), 'var n; var total; n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
 
     test.equal(compileCommand(test, '\
     n = 1\n\
@@ -163,7 +163,7 @@ exports['Compile composite with indent'] = function (test) {
     while n <= 10:\n\
       total *= n\n\
       n += 1\n\
-    print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
+    print(total)'), 'var n; var total; n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
 
     test.equal(compileCommand(test, '\
     n = 1\n\
@@ -173,7 +173,7 @@ exports['Compile composite with indent'] = function (test) {
       total *= n\n\
       n += 1\n\
     \n\
-    print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
+    print(total)'), 'var n; var total; n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
 }
 
 exports['Skipping blank lines'] = function (test) {
@@ -189,7 +189,7 @@ exports['Skipping blank lines'] = function (test) {
       n += 1\n\
     \n\
     \n\
-    print(total)'), 'n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
+    print(total)'), 'var n; var total; n = 1; total = 1; while (n <= 10) { total *= n; n += 1; } print(total);');
 
     // http://docs.python.org/3.3/reference/lexical_analysis.html#implicit-line-joining
 
