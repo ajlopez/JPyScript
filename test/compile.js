@@ -222,3 +222,8 @@ exports['Compile def with local variables and module variables'] = function (tes
     test.equal(compileCommand(test, 'a = 2; def f(): a = 1'), 'var a; a = 2; function f() { var a; a = 1; }');
     test.equal(compileCommand(test, 'b = 1; def f():\n  a = b'), 'var b; b = 1; function f() { var a; a = b; }');
 }
+
+exports['Compile def with argument variables'] = function (test) {
+    test.equal(compileCommand(test, 'def f(a): a = 1'), 'function f(a) { a = 1; }');
+    test.equal(compileCommand(test, 'def f(a,b):\n  a = b'), 'function f(a, b) { a = b; }');
+}
