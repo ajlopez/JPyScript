@@ -45,6 +45,7 @@ TBD
 - [Python: How to make a cross-module variable?](http://stackoverflow.com/questions/142545/python-how-to-make-a-cross-module-variable)
 - [Python exec](http://docs.python.org/2.0/ref/exec.html)
 - [PyPy.js: First Steps](http://www.rfk.id.au/blog/entry/pypy-js-first-steps/)
+- [Simple Statements](http://docs.python.org/3/reference/simple_stmts.html)
 
 ## License
 
