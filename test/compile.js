@@ -14,7 +14,7 @@ function compileCommand(test, text) {
     var cmd = parser.parseCommand();
     test.ok(cmd);
     test.equal(parser.parseCommand(), null);
-    var code = cmd.compile(true);
+    var code = cmd.compile({ withvars: true });
     return code;
 }
 
