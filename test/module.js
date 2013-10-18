@@ -23,8 +23,8 @@ exports['for in string'] = function (test) {
 }
 
 exports['while'] = function (test) {
-    py2s.execute('total = 0; while total < 10: total += 1', true);
-    test.equal(py2s.evaluate('total'), 10);
-    test.ok(total);
-    test.equal(total, 10);
+    var result = py2s.executeModule('total = 0; while total < 10: total += 1');
+    test.ok(result);
+    test.ok(result.total);
+    test.equal(result.total, 10);
 }
