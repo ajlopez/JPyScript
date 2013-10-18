@@ -147,8 +147,8 @@ exports['Compile extended assignments'] = function (test) {
 }
 
 exports['Compile for in'] = function (test) {
-    test.equal(compileCommand(test, 'for a in b: print(a)'), 'var a; forEach(b, function($item) { a = $item; print(a); })');
-    test.equal(compileCommand(test, 'for item in [1,2,3]: total += item'), 'var item; var total; forEach([1, 2, 3], function($item) { item = $item; total += item; })');
+    test.equal(compileCommand(test, 'for a in b: print(a)'), 'var a; forEach(b, function($item) { a = $item; print(a); });');
+    test.equal(compileCommand(test, 'for item in [1,2,3]: total += item'), 'var item; var total; forEach([1, 2, 3], function($item) { item = $item; total += item; });');
 }
 
 exports['Compile composite with indent'] = function (test) {
