@@ -14,3 +14,6 @@ exports['Compile variable'] = function (test) {
     test.equal(compileCommand(test, "a = 1"), "var a; a = 1; return { a: a };");
 }
 
+exports['Compile two variables'] = function (test) {
+    test.equal(compileCommand(test, "a = 1\nb = 2"), "var a; var b; a = 1; b = 2; return { a: a, b: b };");
+}
