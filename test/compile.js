@@ -135,8 +135,8 @@ exports['Compile dotted name'] = function (test) {
 }
 
 exports['Compile dictionary as object'] = function (test) {
-    test.equal(compileExpression(test, '{}'), '{}');
-    test.equal(compileExpression(test, "{'name': 'Adam', 'age': 800}"), "{'name': 'Adam', 'age': 800}");
+    test.equal(compileExpression(test, '{}'), '{ }');
+    test.equal(compileExpression(test, "{'name': 'Adam', 'age': 800}"), "{ 'name': 'Adam', 'age': 800 }");
 }
 
 exports['Compile extended assignments'] = function (test) {
