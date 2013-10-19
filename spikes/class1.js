@@ -5,9 +5,6 @@ var Foo = (function () {
     function $obj () { }
     
     function $cons () { 
-        if (!$obj.prototype.__class__)
-            $obj.prototype.__class__ = Foo;
-            
         var newobj = new $obj();
         var initargs = [];
         initargs[0] = newobj;
@@ -29,6 +26,7 @@ var Foo = (function () {
     
     $cons.get_name = get_name;
     $obj.prototype.get_name = function () { return get_name(this); };
+    $obj.prototype.__class__ = $cons;
     
     return $cons;
 })();
