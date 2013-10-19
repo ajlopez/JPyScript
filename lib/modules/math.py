@@ -1,0 +1,1 @@
+PI = Math.PIdef sin(x):    return Math.sin(x)    def cos(x):    return Math.cos(x)    def abs(x):    return Math.abs(x)    def exp(x):    return Math.exp(x)    

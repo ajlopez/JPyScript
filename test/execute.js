@@ -31,3 +31,27 @@ exports['new object'] = function (test) {
     test.ok(result);
     test.equal(typeof result, 'object');
 }
+
+exports['import math module'] = function (test) {
+    py2s.execute('import math', true);
+    var result = py2s.evaluate('math');
+    test.ok(result);
+    test.ok(result.PI);
+    test.ok(result.sin);
+    test.ok(result.cos);
+    test.ok(result.exp);
+    test.ok(result.abs);
+    test.equal(typeof result.sin, 'function');
+    test.equal(typeof result.cos, 'function');
+    test.equal(typeof result.exp, 'function');
+    test.equal(typeof result.abs, 'function');
+}
+
+exports['import http module'] = function (test) {
+    py2s.execute('import http', true);
+    var result = py2s.evaluate('http');
+    var myhttp = require('http');
+    test.ok(result);
+    test.strictEqual(result, myhttp);
+}
+
