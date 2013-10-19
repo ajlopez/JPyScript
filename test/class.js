@@ -11,5 +11,5 @@ function compileCommand(test, text) {
 }
 
 exports['Compile empty class'] = function (test) {
-    test.equal(compileCommand(test, 'class Foo: pass'), 'function Foo() {  }');
+    test.equal(compileCommand(test, 'class Foo: pass'), 'var Foo = (function() { function $obj() { } function $cons() { return new $obj(); } return $cons; })();');
 }

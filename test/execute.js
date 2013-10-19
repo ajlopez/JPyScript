@@ -24,3 +24,10 @@ exports['while'] = function (test) {
     test.ok(total);
     test.equal(total, 10);
 }
+
+exports['new object'] = function (test) {
+    py2s.execute('class Foo: pass\na = Foo()', true);
+    var result = py2s.evaluate('a');
+    test.ok(result);
+    test.equal(typeof result, 'object');
+}
