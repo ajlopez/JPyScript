@@ -86,11 +86,11 @@ exports['Get three integers'] = function (test) {
 }
 
 exports['Get single char operators'] = function (test) {
-    getTokens(test, "+-*/.><", ["+", "-", "*", "/", ".", ">", "<"], TokenType.Operator);
+    getTokens(test, "+-*/.><|&", ["+", "-", "*", "/", ".", ">", "<", "|", "&"], TokenType.Operator);
 }
 
 exports['Get two char operators'] = function (test) {
-    getTokens(test, "** <= >= == <> !=", ["**", "<=", ">=", "==", "<>", "!="], TokenType.Operator);
+    getTokens(test, "** <= >= == <> != || &&", ["**", "<=", ">=", "==", "<>", "!=", "||", "&&"], TokenType.Operator);
 }
 
 exports['Get assignments'] = function (test) {
