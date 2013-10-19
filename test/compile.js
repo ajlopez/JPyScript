@@ -231,3 +231,12 @@ exports['Compile def with argument variables'] = function (test) {
     test.equal(compileCommand(test, 'def f(a): a = 1'), 'function f(a) { a = 1; }');
     test.equal(compileCommand(test, 'def f(a,b):\n  a = b'), 'function f(a, b) { a = b; }');
 }
+
+exports['Compile simple import'] = function (test) {
+    test.equal(compileCommand(test, 'import mymodule'), "var mymodule; mymodule = importModule('mymodule');");
+}
+
+exports['Compile require'] = function (test) {
+    test.equal(compileCommand(test, "net = require('net')"), "var net; net = require('net');");
+}
+
