@@ -49,6 +49,7 @@ TBD
 - [Classes](http://docs.python.org/3/tutorial/classes.html)
 - [Importing Python Modules](http://effbot.org/zone/import-confusion.htm)
 - [Defining private module functions in python](http://stackoverflow.com/questions/1547145/defining-private-module-functions-in-python)
+- [Python 3 Data Model](http://docs.python.org/3/reference/datamodel.html)
 
 ## License
 
