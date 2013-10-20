@@ -19,8 +19,6 @@ exports['len'] = function (test) {
 exports['Index'] = function (test) {
     test.equal(py2s.evaluate('"spam"[0]'), 's');
     test.equal(py2s.evaluate('"spam"[1]'), 'p');
-    test.equal(py2s.evaluate('"spam"[-1]'), 'm');
-    test.equal(py2s.evaluate('"spam"[-2]'), 'a');
 }
 
 exports['Global'] = function (test) {

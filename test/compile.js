@@ -121,7 +121,7 @@ exports['Compile while with continue'] = function (test) {
 }
 
 exports['Compile index access'] = function (test) {
-    test.equal(compileExpression(test, 'a[1]'), 'getIndex(a, 1)');
+    test.equal(compileExpression(test, 'a[1]'), 'a[1]');
 }
 
 exports['Compile list as array'] = function (test) {

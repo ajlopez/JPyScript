@@ -4,6 +4,7 @@
 import express
 import path
 import http
+import customer
 
 app = express()
 
@@ -36,12 +37,9 @@ def about(request, response):
 def contact(request, response):
     response.render('index', { 'title': 'Contact' })
 
-def customer(request, response):
-    response.render('index', { 'title': 'Customers' })
-
 app.get('/', index)
 app.get('/about', about)
-app.get('/customer', customer)
+app.get('/customer', customer.index)
 app.get('/contact', contact)
 
 def started():
