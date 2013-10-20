@@ -34,4 +34,7 @@ exports['import local file'] = function (test) {
     test.equal(result.a, 1);
     test.equal(result.b, 2);
     test.equal(result.c, 3);
+    test.ok(result.MyClass);
+    test.equal(typeof result.MyClass, 'function');
 }
+
