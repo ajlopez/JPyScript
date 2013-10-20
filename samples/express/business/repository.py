@@ -1,0 +1,1 @@
+class Repository:    def __init__(self):        self.items = []        self.maxid = 0            def add(self, item):        self.maxid = self.maxid + 1        item.id = self.maxid        self.items.push(item)        

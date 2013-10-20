@@ -1,0 +1,1 @@
+import repositoryrepo = repository.Repository()__debug__ = trueassert repo.maxid == 0customer = { }customer.name = "Customer 1"repo.add(customer)assert repo.maxid == 1assert customer.id == 1
