@@ -54,7 +54,7 @@ Python:
 - [Python 3 Data Model](http://docs.python.org/3/reference/datamodel.html)
 
 Node.js vm, contexts, require:
-- https://github.com/joyent/node/blob/master/lib/module.js
+- https://github.com/joyent/node/blob/master/lib/module.js (see _nodeModulePaths)
 - [Testing Private State and Mocking Dependencies](http://howtonode.org/testing-private-state-and-mocking-deps)
 - [Node.js Virtual Machine (vm) Usage](http://www.davidmclifton.com/2011/08/18/node-js-virtual-machine-vm-usage/)
 - http://nodejs.org/api/vm.html
