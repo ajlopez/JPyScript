@@ -52,7 +52,9 @@ Python:
 - [Classes](http://docs.python.org/3/tutorial/classes.html)
 - [Importing Python Modules](http://effbot.org/zone/import-confusion.htm)
 - [Defining private module functions in python](http://stackoverflow.com/questions/1547145/defining-private-module-functions-in-python)
-- [Python 3 Data Model](http://docs.python.org/3/reference/datamodel.html)
+- [Python 3 Data Model](http://docs.python.org/3/reference/datamodel.html)\
+- [The Python "with" Statement by Example](http://preshing.com/20110920/the-python-with-statement-by-example/)
+- [PEP 343: The "with" Statement](http://www.python.org/dev/peps/pep-0343/)
 
 Node.js vm, contexts, require:
 - https://github.com/joyent/node/blob/master/lib/module.js (see _nodeModulePaths)
