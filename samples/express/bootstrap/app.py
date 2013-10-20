@@ -2,11 +2,12 @@
 # Module dependencies
 
 import express
+import path
 import http
 
 app = express()
 
-app.engine('ejs', require('ejs-locals'))
+app.engine('ejs', configuration.require('ejs-locals'))
 
 # all environments
 
@@ -20,18 +21,20 @@ app.use(express.methodOverride())
 app.use(express.cookieParser('your secret here'))
 app.use(express.session())
 app.use(app.router)
-app.use(express.static('./public')))
+app.use(express.static('./public'))
 
-// development only
-if ('development' == app.get('env')):
+# development only
+if 'development' == app.get('env'):
     app.use(express.errorHandler())
     
 def index(request, response):
     response.render('index', { 'title': 'Bootstrap Sample' })
 
-app.get('/', routes.index)
+app.get('/', index)
 
 def started():
     console.log('Express server listening on port ' + app.get('port'))
 
-http.createServer(app).listen(app.get('port'), started);
+server = http.createServer(app)
+server.listen(app.get('port'), started)
+

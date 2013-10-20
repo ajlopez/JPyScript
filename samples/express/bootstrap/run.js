@@ -2,6 +2,8 @@
 var jpyscript = require('../../..'),
     fs = require('fs');
     
+jpyscript.configure({ require: require });
+    
 function executeFile(filename) {
     var text = fs.readFileSync(filename).toString();
     jpyscript.execute(text);
