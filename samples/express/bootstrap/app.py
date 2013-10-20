@@ -7,7 +7,7 @@ import http
 
 app = express()
 
-app.engine('ejs', configuration.require('ejs-locals'))
+app.engine('ejs', require('ejs-locals'))
 
 # all environments
 
