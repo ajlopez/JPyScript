@@ -251,3 +251,7 @@ exports['Compile raise'] = function (test) {
 exports['Compile global with one variable'] = function (test) {
     test.equal(compileCommand(test, "global a\na = 3"), "a = 3;"); 
 }
+
+exports['Compile nonlocal with one variable'] = function (test) {
+    test.equal(compileCommand(test, "nonlocal a\na = 3"), "a = 3;"); 
+}
