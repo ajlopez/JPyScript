@@ -248,3 +248,6 @@ exports['Compile raise'] = function (test) {
     test.equal(compileCommand(test, "raise 'error'"), "throw 'error';"); 
 }
 
+exports['Compile global with one variable'] = function (test) {
+    test.equal(compileCommand(test, "global a\na = 3"), "a = 3;"); 
+}
