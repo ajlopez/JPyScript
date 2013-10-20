@@ -55,6 +55,7 @@ Python:
 - [Python 3 Data Model](http://docs.python.org/3/reference/datamodel.html)\
 - [The Python "with" Statement by Example](http://preshing.com/20110920/the-python-with-statement-by-example/)
 - [PEP 343: The "with" Statement](http://www.python.org/dev/peps/pep-0343/)
+- [The Import System](http://docs.python.org/3/reference/import.html)
 
 Node.js vm, contexts, require:
 - https://github.com/joyent/node/blob/master/lib/module.js (see _nodeModulePaths)

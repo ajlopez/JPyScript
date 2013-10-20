@@ -255,3 +255,13 @@ exports['Compile global with one variable'] = function (test) {
 exports['Compile nonlocal with one variable'] = function (test) {
     test.equal(compileCommand(test, "nonlocal a\na = 3"), "a = 3;"); 
 }
+
+exports['Compile None'] = function (test) {
+    test.equal(compileExpression(test, "None"), "null"); 
+}
+
+exports['Compile Booleans'] = function (test) {
+    test.equal(compileExpression(test, "True"), "true"); 
+    test.equal(compileExpression(test, "False"), "false"); 
+}
+
