@@ -1,6 +1,9 @@
 
 var assert = require('assert');
 
+// http://docs.python.org/3/reference/simple_stmts.html#assignment-statements
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+
 function makeClass(init) {
     function obj() { }
 
@@ -49,11 +52,6 @@ var Foo = (function () {
     Object.defineProperty($cons, 'x', {
         get: function () { return x; },
         set: function ($value) { x = $value; }
-    });
-    
-    Object.defineProperty($obj.prototype, 'x', {
-        get: function () { return x; },
-        set: function ($value) { Object.defineProperty(this, 'x'); this.x = $value }
     });
     
     return $cons;
