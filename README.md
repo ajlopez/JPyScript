@@ -48,6 +48,7 @@ Python:
 - [Python exec](http://docs.python.org/2.0/ref/exec.html)
 - [PyPy.js: First Steps](http://www.rfk.id.au/blog/entry/pypy-js-first-steps/)
 - [Simple Statements](http://docs.python.org/3/reference/simple_stmts.html)
+- [Compound Statements](http://docs.python.org/3/reference/compound_stmts.html)
 - [Classes](http://docs.python.org/3/tutorial/classes.html)
 - [Importing Python Modules](http://effbot.org/zone/import-confusion.htm)
 - [Defining private module functions in python](http://stackoverflow.com/questions/1547145/defining-private-module-functions-in-python)
