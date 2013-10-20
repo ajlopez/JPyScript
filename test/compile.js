@@ -240,3 +240,7 @@ exports['Compile require'] = function (test) {
     test.equal(compileCommand(test, "net = require('net')"), "var net; net = require('net');");
 }
 
+exports['Compile assert'] = function (test) {
+    test.equal(compileCommand(test, "assert a == 1"), "if (__debug__ && !(a == 1)) { throw 'assert error' }"); 
+}
+
