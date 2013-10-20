@@ -35,6 +35,8 @@ TBD
 
 ## References
 
+Python:
+
 - [Why Are There So Many Pythons?](http://www.toptal.com/python/why-are-there-so-many-pythons)
 - [Brython: A Python 3 implementation for client-side web programming](http://www.brython.info/)
 - [Skulp](http://www.skulpt.org/): Python. Client side
@@ -50,6 +52,12 @@ TBD
 - [Importing Python Modules](http://effbot.org/zone/import-confusion.htm)
 - [Defining private module functions in python](http://stackoverflow.com/questions/1547145/defining-private-module-functions-in-python)
 - [Python 3 Data Model](http://docs.python.org/3/reference/datamodel.html)
+
+Node.js vm, contexts, require:
+- https://github.com/joyent/node/blob/master/lib/module.js
+- [Testing Private State and Mocking Dependencies](http://howtonode.org/testing-private-state-and-mocking-deps)
+- [Node.js Virtual Machine (vm) Usage](http://www.davidmclifton.com/2011/08/18/node-js-virtual-machine-vm-usage/)
+- http://nodejs.org/api/vm.html
 
 ## License
 
