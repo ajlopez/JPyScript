@@ -55,3 +55,13 @@ exports['import http module'] = function (test) {
     test.strictEqual(result, myhttp);
 }
 
+exports['assert throw error'] = function (test) {
+    test.throws(
+        function () {
+            py2s.execute('a = 1\n__debug__ = true\nassert a==2');
+        },
+        function (err) {
+            return err === 'assert error';
+        }
+    );
+}
