@@ -40,6 +40,7 @@ def contact(request, response):
 app.get('/', index)
 app.get('/about', about)
 app.get('/customer', customer.index)
+app.get('/customer/:id', customer.view)
 app.get('/contact', contact)
 
 def started():
