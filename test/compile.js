@@ -244,3 +244,7 @@ exports['Compile assert'] = function (test) {
     test.equal(compileCommand(test, "assert a == 1"), "if (__debug__ && !(a == 1)) { throw 'assert error' }"); 
 }
 
+exports['Compile raise'] = function (test) {
+    test.equal(compileCommand(test, "raise 'error'"), "throw 'error';"); 
+}
+
