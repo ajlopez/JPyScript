@@ -1,4 +1,291 @@
 
+var jpyscript = (function() {
+
+var jpylexer = (function() {
+    var TokenType = { Name: 1, Integer: 2, Real: 3, String: 4, Operator: 5, Separator: 6, EndOfLine: 7, Assignment: 8 };
+    var operators = ["+" , "-", "*", "/", ".", ">", "<", "<=", ">=", "!=", "<>", "**", "==", "%", "|", "&", "||", "&&"];
+    var assignments = ["=" , "+=", "-=", "*=", "/="];
+    var separators = "()[]{},:;";
+
+    function Token(value, type)
+    {
+        this.value = value;
+        this.type = type;
+    };
+
+    function Lexer(text) {
+        var length = text ? text.length : 0;
+        var position = 0;
+        var next = [];
+
+        this.nextToken = function() {
+            if (next.length)
+                return next.pop();
+
+            var ch = nextFirstChar();
+
+            if (ch == null)
+                return null;
+
+            if (isNameFirstCharacter(ch))
+                return nextName(ch);
+
+            if (isDigit(ch))
+                return nextInteger(ch);
+
+            if (isOperator(ch))
+                return nextOperator(ch);
+
+            if (isAssignment(ch))
+                return nextAssignment(ch);
+
+            if (isSeparator(ch))
+                return nextSeparator(ch);
+
+            if (ch === '"' || ch === "'")
+                return nextString(ch);
+
+            var ch2 = nextChar();
+
+            if (ch2 && isOperator(ch + ch2))
+                return new Token(ch + ch2, TokenType.Operator); 
+            else if (ch2 && isAssignment(ch + ch2))
+                return new Token(ch + ch2, TokenType.Assignment);
+            else
+                pushChar(ch2);
+
+            if (isEndOfLine(ch))
+                return nextEndOfLine(ch);
+
+            throw "unexpected '" + ch + "'";
+        };
+
+        this.pushToken = function (token) {
+            if (token)
+                next.push(token);
+        };
+
+        this.getIndent = function () {
+            var indent = 0;
+            var ch;
+            var pos = position;
+
+            while (pos < length) {
+                ch = text[pos];
+
+                if (isEndOfLine(ch)) {
+                    indent = 0;
+                    pos++;
+                    continue;
+                }
+
+                if (!isSpace(text[pos]))
+                    break;
+
+                indent++;
+                pos++;
+            }
+
+            if (pos >= length)
+                return 0;
+
+            return indent;
+        };
+
+        function nextName(letter)
+        {
+            var name = letter;
+
+            for (var ch = nextChar(); ch && isNameCharacter(ch); ch = nextChar())
+                name += ch;
+
+            pushChar(ch);
+
+            return new Token(name, TokenType.Name);
+        }
+
+        function nextString(quote)
+        {
+            var value = '';
+
+            for (var ch = nextChar(); ch && ch != quote; ch = nextChar())
+                value += ch;
+
+            return new Token(value, TokenType.String);
+        }
+
+        function nextInteger(digit)
+        {
+            var number = digit;
+
+            for (var ch = nextChar(); ch && isDigit(ch); ch = nextChar())
+                number += ch;
+
+            if (ch === '.')
+                return nextReal(number + '.');
+
+            pushChar(ch);
+
+            return new Token(number, TokenType.Integer);
+        }
+
+        function nextReal(number)
+        {
+            for (var ch = nextChar(); ch && isDigit(ch); ch = nextChar())
+                number += ch;
+
+            pushChar(ch);
+
+            return new Token(number, TokenType.Real);
+        }
+
+        function nextEndOfLine(ch)
+        {
+            if (ch === '\r') {
+                var ch2 = nextChar();
+                if (ch2 === '\n')
+                    ch += ch2;
+                else
+                    pushChar(ch2);
+            }
+
+            return new Token(ch, TokenType.EndOfLine);
+        }
+
+        function nextOperator(ch)
+        {
+            var ch2 = nextChar();
+            if (ch2 && !isSpace(ch2) && isOperator(ch + ch2))
+                return new Token(ch + ch2, TokenType.Operator);
+            else if (ch2 && !isSpace(ch2) && isAssignment(ch + ch2))
+                return new Token(ch + ch2, TokenType.Assignment);
+            else
+                pushChar(ch2);
+            return new Token(ch, TokenType.Operator);
+        }
+
+        function nextAssignment(ch)
+        {
+            var ch2 = nextChar();
+            if (ch2 && !isSpace(ch2) && isAssignment(ch + ch2))
+                return new Token(ch + ch2, TokenType.Assignment);
+            else if (ch2 && !isSpace(ch2) && isOperator(ch + ch2))
+                return new Token(ch + ch2, TokenType.Operator);
+            else
+                pushChar(ch2);
+            return new Token(ch, TokenType.Assignment);
+        }
+
+        function nextSeparator(ch)
+        {
+            return new Token(ch, TokenType.Separator);
+        }
+
+        function pushChar(ch)
+        {
+            if (ch != null)
+                position--;
+        }
+
+        function nextChar() {
+            while (true) {
+                if (position >= length)
+                    return null;
+
+                var ch = text[position++];
+
+                if (ch === '\\' && isEndOfLine(text[position])) {
+                    if (text[position] == '\n') {
+                        position++;
+                        continue;
+                    }
+                    if (text[position] == '\r' && text[position+1] == '\n') {
+                        position += 2;
+                        continue;
+                    }
+                }
+
+                if (ch === '#') {
+                    for (ch = nextChar(); ch && !isEndOfLine(ch);)
+                        ch = nextChar();
+                    if (ch)
+                        return ch;
+                    return null;
+                }
+
+                break;
+            }
+
+            return ch;
+        }
+
+        function nextFirstChar() {
+            skipSpaces();
+            
+            if (position >= length)
+                return null;
+                
+            return nextChar();
+        }
+
+        function skipSpaces() {
+            for (var ch = nextChar(); ch && isSpace(ch);)
+                ch = nextChar();
+
+            if (ch)
+                pushChar(ch);
+        }
+
+        function isSpace(ch) {
+            if (ch <= ' ' && ch !== '\n' && ch !== '\r')
+                return true;
+                
+            return false;
+        }
+
+        function isEndOfLine(ch) {
+            return ch === '\r' || ch === '\n';
+        }
+    }
+
+    function isLetter(ch) {
+        return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
+    }
+
+    function isDigit(ch) {
+        return ch >= '0' && ch <= '9';
+    }
+
+    function isNameFirstCharacter(ch) {
+        return isLetter(ch) || ch === '_';
+    }
+
+    function isNameCharacter(ch) {
+        return isLetter(ch) || isDigit(ch) || ch === '_';
+    }
+
+    function isOperator(ch) {
+        return operators.indexOf(ch) >= 0;
+    }
+
+    function isAssignment(ch) {
+        return assignments.indexOf(ch) >= 0;
+    }
+
+    function isSeparator(ch) {
+        return separators.indexOf(ch) >= 0;
+    }
+
+    return {
+        createLexer : function (text) { return new Lexer(text); },
+        TokenType: TokenType
+    };
+})();
+
+if (typeof(window) === 'undefined') {
+	module.exports = jpylexer;
+}
+
 if (typeof jpylexer === 'undefined')
     var jpylexer = require('./jpylexer');
 
@@ -980,3 +1267,166 @@ var jpyparser = (function() {
 
 if (typeof module !== 'undefined' && module && module.exports)
 	module.exports = jpyparser;
+
+if (typeof require != 'undefined') {
+    var jpyparser = require('./jpyparser');
+    var util = require('util');
+    var path = require('path');
+    var fs = require('fs');
+}
+
+var jpyscript = (function() {
+    function evaluate(text) {
+        var parser = jpyparser.createParser(text);
+
+        return eval(parser.parseExpression().compile());
+    }
+    
+    function execute(text, novars) {
+        var parser = jpyparser.createParser(text);
+
+        var withvars = true;
+        
+        if (novars)
+            withvars = false;
+            
+        var code = parser.parseCommand().compile({ withvars: withvars });
+        return eval(code);
+    }
+
+    function executeModule(text) {
+        var parser = jpyparser.createParser(text);
+        var code = parser.parseCommand().compile({ withvars: true, exports: true });
+        return eval('(function () { ' + code + ' })()');
+    }
+
+    function getIndex(value, index) {
+        if (index < 0)
+            return value[value.length + index];
+
+        return value[index];
+    }
+
+    function len(value) {
+        return value.length;
+    }
+
+    function print() {
+        var n = arguments.length;
+        var np = 0;
+        
+        for (var k = 0; k < n; k++)
+            if (arguments[k] !== null) {
+                if (np)
+                    util.print(' ');
+                util.print(arguments[k]);
+                np++;
+            }
+                
+        util.print('\n');
+    }
+    
+    function makeClass(init) {
+        function obj() { }
+
+        function cons() {
+            var newobj = new obj();
+            var initargs = [];
+            initargs[0] = newobj;
+            
+            for (var k = 0; k < arguments.length; k++)
+                initargs[k + 1] = arguments[k];
+            
+            init.apply(null, initargs);
+            return newobj;
+        }
+        
+        obj.prototype.__class__ = cons;
+        
+        return { obj: obj, cons: cons }
+    }
+
+    var importcache = { };
+    var configuration = { };
+    
+    if (typeof require != 'undefined')
+        configuration.require = require;
+
+    function importModule(name) {
+        if (importcache[name])
+            return importcache[name];
+            
+        var filename = name + '.py';
+        
+        if (fs.existsSync(filename))
+            return importFileModule(filename, name);
+    
+        var filename = path.join(__dirname, 'modules', name + '.py');
+        
+        if (fs.existsSync(filename))
+            return importFileModule(filename, name);
+
+        var result = configuration.require(name);        
+        importcache[name] = result;
+        
+        return result;
+    }
+    
+    function importFileModule(filename, name) {
+        var text = fs.readFileSync(filename).toString();
+        var result = executeModule(text);
+        importcache[name] = result;
+        return result;
+    }
+
+    function forEach(list, fn) {
+        if (list == null)
+            return;
+
+        if (typeof list == 'string') {
+            var l = list.length;
+
+            for (var k = 0; k < l; k++)
+                fn(list[k]);
+
+            return;
+        }
+
+        if (list instanceof Array) {
+            for (var n in list)
+                fn(list[n]);
+
+            return;
+        }
+
+        for (var item in list)
+            fn(item);
+    }
+
+    function evaluate(text) {
+        var parser = jpyparser.createParser(text);
+        return eval(parser.parseExpression().compile());
+    }
+    
+    function configure(conf) {
+        Object.keys(conf).forEach(function (key) {
+            configuration[key] = conf[key];
+        });
+        
+        if (conf.require)
+            require = conf.require;
+    }
+
+    return {
+        evaluate: evaluate,
+        execute: execute,
+        executeModule: executeModule,
+        configure: configure
+    };
+})();
+
+if (typeof module !== 'undefined' && module && module.exports)
+	module.exports = jpyscript;
+    return jpyscript;
+
+})();
