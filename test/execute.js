@@ -18,6 +18,13 @@ exports['for in'] = function (test) {
     test.equal(acum, 's.p.a.m.');
 }
 
+exports['for in range'] = function (test) {
+    py2s.execute('total = 0; for item in range(1, 4): total += item', true);
+    test.equal(py2s.evaluate('total'), 10);
+    test.ok(total);
+    test.equal(total, 10);
+}
+
 exports['while'] = function (test) {
     py2s.execute('total = 0; while total < 10: total += 1', true);
     test.equal(py2s.evaluate('total'), 10);
