@@ -32,6 +32,14 @@ pencil = Pencil(context)
 
 pencil.draw_line(0, 0, 150, 150)
 
+degree = 0
+radium = 100
+
+while degree < Math.PI * 2:
+    x = Math.cos(degree) * radium
+    y = Math.sin(degree) * radium
+    pencil.draw_line(150, 150, 150 + x, 150 + y)
+    degree = degree + 0.1
 </script>
 </body>
 </html>
