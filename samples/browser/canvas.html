@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Canvas Demo</title>
+<script src="../../dist/jpyscript.js" type="text/javascript"></script>
+</head>
+<body>
+<h1>Canvas Demo</h1>
+
+<canvas id="canvas" width="300" height="300">
+</canvas>
+
+<script type="text/python">
+
+class Pencil:
+    def __init__(self, context):
+        self.context = context
+        
+    def draw_line(self, x1, y1, x2, y2):
+        self.context.beginPath()
+        self.context.moveTo(x1, y1)
+        self.context.lineTo(x2, y2)
+        self.context.closePath()
+        self.context.stroke()
+
+canvas = document.getElementById('canvas')
+context = canvas.getContext("2d")
+context.strokeStyle = "black"
+context.lineJoin = "round"
+context.lineWidth = 5
+
+pencil = Pencil(context)
+
+pencil.draw_line(0, 0, 150, 150)
+
+
+</script>
+</body>
+</html>
