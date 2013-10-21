@@ -1430,3 +1430,23 @@ if (typeof module !== 'undefined' && module && module.exports)
     return jpyscript;
 
 })();
+
+
+// http://coffeescript.org/documentation/docs/browser.html
+
+function runScripts() {
+    var scripts = window.document.getElementsByTagName('script');
+    
+    for (var i = 0; i < scripts.length; i++) {
+        var script = scripts[i];
+        if (script.type != 'text/python')
+            continue;
+            
+        jpyscript.execute(script.innerHTML, true);
+    }
+}
+
+if (window.addEventListener)
+    window.addEventListener('DOMContentLoaded', runScripts, false);
+else
+    window.attachEvent('onload', runScripts);
