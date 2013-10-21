@@ -58,10 +58,16 @@ Python:
 - [The Import System](http://docs.python.org/3/reference/import.html)
 
 Node.js vm, contexts, require:
+
 - https://github.com/joyent/node/blob/master/lib/module.js (see _nodeModulePaths)
 - [Testing Private State and Mocking Dependencies](http://howtonode.org/testing-private-state-and-mocking-deps)
 - [Node.js Virtual Machine (vm) Usage](http://www.davidmclifton.com/2011/08/18/node-js-virtual-machine-vm-usage/)
 - http://nodejs.org/api/vm.html
+
+Running scripts in browser:
+
+- [Running CoffeeScript In-Browser](http://forgivingworm.wordpress.com/2010/09/27/running-coffeescript-in-browser/)
+- [Browser.Coffee](http://coffeescript.org/documentation/docs/browser.html)
 
 ## License
 
