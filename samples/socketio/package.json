@@ -1,0 +1,12 @@
+{
+  "name": "jpyscript-socketio-samples",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+	"socket.io": "latest"
+  }
+, "scripts": {
+  }
+, "devDependencies": {
+  }
+}
