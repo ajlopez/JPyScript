@@ -1,0 +1,12 @@
+{
+  "name": "jpyscript-irc-sample",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "irc": "latest"
+  }
+, "scripts": {
+  }
+, "devDependencies": {
+  }
+}

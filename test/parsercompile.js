@@ -265,3 +265,6 @@ exports['Compile Booleans'] = function (test) {
     test.equal(compileExpression(test, "False"), "false"); 
 }
 
+exports['Compile new expression'] = function (test) {
+    test.equal(compileExpression(test, "new Foo()"), "new Foo()"); 
+}
