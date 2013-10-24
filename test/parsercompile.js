@@ -268,3 +268,14 @@ exports['Compile Booleans'] = function (test) {
 exports['Compile new expression'] = function (test) {
     test.equal(compileExpression(test, "new Foo()"), "new Foo()"); 
 }
+
+exports['Compile two if'] = function (test) {
+    test.equal(compileCommand(test, "if b:\n  a\nif c:\n  d"), "if (b) { a; } if (c) { d; }"); 
+}
+
+/*
+exports['Compile two if in function'] = function (test) {
+    console.log('def foo');
+    test.equal(compileCommand(test, "def foo():\n  if b:\n    a\n  if c:\n    d"), "function () { if (b) { a; } if (c) { d; } }"); 
+}
+*/
