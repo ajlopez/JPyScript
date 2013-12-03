@@ -35,13 +35,17 @@ TBD
 
 ## References
 
-Python:
+Python and JavaScript:
 
 - [Why Are There So Many Pythons?](http://www.toptal.com/python/why-are-there-so-many-pythons)
 - [Brython: A Python 3 implementation for client-side web programming](http://www.brython.info/)
 - [Skulp](http://www.skulpt.org/): Python. Client side
 - [PythonJS](https://github.com/PythonJS/PythonJS) Javascript translator written in Python
 - [Brython vs PythonJS](http://pyppet.blogspot.com.ar/2013/11/brython-vs-pythonjs.html) Performance and implementation comparison
+- [Pythonium](https://pypi.python.org/pypi/pythonium/0.4.5) Python 3 to Javascript translator written in Python
+
+Python:
+
 - [pyjs](http://pyjs.org/): a Rich Internet Application (RIA) Development Platform for both Web and Desktop
 - [Notes on Python variable scope](http://www.saltycrane.com/blog/2008/01/python-variable-scope-notes/)
 - [Python Variable Scope](http://gettingstartedwithpython.blogspot.com.ar/2012/05/variable-scope.html)
