@@ -52,7 +52,9 @@ Python:
 - [Python variable scope question](http://stackoverflow.com/questions/370357/python-variable-scope-question)
 - [Python: How to make a cross-module variable?](http://stackoverflow.com/questions/142545/python-how-to-make-a-cross-module-variable)
 - [Python exec](http://docs.python.org/2.0/ref/exec.html)
+- [PyPy.js](https://github.com/rfk/pypyjs) PyPy compiled to JavaScript
 - [PyPy.js: First Steps](http://www.rfk.id.au/blog/entry/pypy-js-first-steps/)
+- [PyPy.js online](https://rfk.id.au/static/pypyjs/)
 - [Simple Statements](http://docs.python.org/3/reference/simple_stmts.html)
 - [Compound Statements](http://docs.python.org/3/reference/compound_stmts.html)
 - [Classes](http://docs.python.org/3/tutorial/classes.html)
