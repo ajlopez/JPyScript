@@ -64,6 +64,7 @@ Python:
 - [The Python "with" Statement by Example](http://preshing.com/20110920/the-python-with-statement-by-example/)
 - [PEP 343: The "with" Statement](http://www.python.org/dev/peps/pep-0343/)
 - [The Import System](http://docs.python.org/3/reference/import.html)
+- [A Guide to Python's Magic Methods](http://www.rafekettler.com/magicmethods.html)
 
 Node.js vm, contexts, require:
 
