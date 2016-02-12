@@ -43,6 +43,7 @@ Python and JavaScript:
 - [PythonJS](https://github.com/PythonJS/PythonJS) Javascript translator written in Python
 - [Brython vs PythonJS](http://pyppet.blogspot.com.ar/2013/11/brython-vs-pythonjs.html) Performance and implementation comparison
 - [Pythonium](https://pypi.python.org/pypi/pythonium/0.4.5) Python 3 to Javascript translator written in Python
+- [Transcrypt](http://www.transcrypt.org/)
 
 Python:
 
