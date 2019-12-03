@@ -1,11 +1,11 @@
 
-var jpylexer = require('../lib/jpylexer');
+const jpylexer = require('../lib/jpylexer');
 
 TokenType = jpylexer.TokenType;
 
 function getToken(test, text, value, type) {
-    var lexer = jpylexer.createLexer(text);
-    var token = lexer.nextToken();
+    const lexer = jpylexer.createLexer(text);
+    const token = lexer.nextToken();
     test.ok(token);
     test.equal(token.value, value);
     test.equal(token.type, type);
@@ -13,17 +13,17 @@ function getToken(test, text, value, type) {
 }
 
 function getNullToken(test, text) {
-    var lexer = jpylexer.createLexer(text);
-    var token = lexer.nextToken();
+    const lexer = jpylexer.createLexer(text);
+    const token = lexer.nextToken();
     test.equal(token, null);
 }
 
 function getTokens(test, text, values, type) {
-    var lexer = jpylexer.createLexer(text);
-    var n = values.length;
+    const lexer = jpylexer.createLexer(text);
+    const n = values.length;
 
-    for (var k = 0; k < n; k++) {
-        var token = lexer.nextToken();
+    for (let k = 0; k < n; k++) {
+        const token = lexer.nextToken();
         test.ok(token);
         test.equal(token.value, values[k]);
         test.equal(token.type, type);
@@ -33,7 +33,7 @@ function getTokens(test, text, values, type) {
 }
 
 function getIndent(test, text, value) {
-    var lexer = jpylexer.createLexer(text);
+    const lexer = jpylexer.createLexer(text);
     test.equal(lexer.getIndent(), value);
 }
 

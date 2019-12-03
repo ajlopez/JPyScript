@@ -1,6 +1,6 @@
 # JPyScript
 
-Python language compiler to Javascript. Work in Progress
+Python language interpreter in Javascript. Work in Progress
 
 ## Installation
 
