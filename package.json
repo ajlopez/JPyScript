@@ -1,17 +1,17 @@
 { "name": "jpyscript"
-, "description": "Python compiler to JavaScript"
-, "keywords": [ "python", "interpreter", "compiler", "javascript" ]
+, "description": "Python interpreter to JavaScript"
+, "keywords": [ "python", "interpreter", "javascript" ]
 , "version": "0.0.1alpha"
 , "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)"
 , "repository": { "type": "git", "url": "git://github.com/ajlopez/JPyScript.git" }
 , "main": "./lib/jpyscript.js"
-, "engines": { "node": ">= 0.6.0 && < 0.13.0" }
+, "engines": { "node": ">= 8.0.0" }
 , "scripts": {
-    "test": "simpleunit ./test"
+    "test": "simpleunit ./test -r"
   }
 , "dependencies": {
   }
 , "devDependencies": {
-    "simpleunit": "0.0.6"
+    "simpleunit": "0.0.8"
   }
 }
