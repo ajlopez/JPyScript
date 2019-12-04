@@ -1,17 +1,28 @@
-{ "name": "jpyscript"
-, "description": "Python interpreter to JavaScript"
-, "keywords": [ "python", "interpreter", "javascript" ]
-, "version": "0.0.1alpha"
-, "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)"
-, "repository": { "type": "git", "url": "git://github.com/ajlopez/JPyScript.git" }
-, "main": "./lib/jpyscript.js"
-, "engines": { "node": ">= 8.0.0" }
-, "scripts": {
+{
+  "name": "jpyscript",
+  "description": "Python interpreter to JavaScript",
+  "keywords": [
+    "python",
+    "interpreter",
+    "javascript"
+  ],
+  "version": "0.0.1alpha",
+  "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ajlopez/JPyScript.git"
+  },
+  "main": "./lib/jpyscript.js",
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "scripts": {
     "test": "simpleunit ./test -r"
-  }
-, "dependencies": {
-  }
-, "devDependencies": {
+  },
+  "dependencies": {
+    "gelex": "0.0.7"
+  },
+  "devDependencies": {
     "simpleunit": "0.0.8"
   }
 }
